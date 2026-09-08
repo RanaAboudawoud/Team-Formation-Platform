@@ -2,15 +2,15 @@
 
 ## Project Description
 
-**Project Name:** *[Your project name]*
+**Project Name:** *Team Formation Platform*
 
-**Customer Name:** *[Your customer's name]*
+**Customer Name:** *Zeth Danielsson ZDA*
 
-**Student Full Name:** *[Your full name. This helps match your repository to you, even if your GitHub handle does not identify you.]*
+**Student Full Name:** *Rana Aboudawoud*
 
 ### Project Aim and Objectives
 
-*[A short description of your project's goals and benefits. Bullet points or 1–2 paragraphs.]*
+*This is a platform where collaboration and team-building is made easier. An idea-maker and a potential team-memeber match together based on skills and requirements. No longer should you be bothered by useless notifications and applicants, now - notifications matter.*
 
 ### User Personas
 
