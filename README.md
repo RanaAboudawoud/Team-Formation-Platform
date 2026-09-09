@@ -30,7 +30,6 @@
 
 ### Software Requirements
 
-**Functional Requirements**
 ## Functional Requirements
 
 | ID | Requirement |
@@ -54,7 +53,6 @@
 | FR-17 | Idea Makers should be able to choose what information about their idea is public and what information is only shown after mutual interest. |
 | FR-18 | Idea Makers should be able to see which skills are still missing from their team. |
 
-**Non-Functional Requirements**
 ## Non-Functional Requirements
 
 | ID | Category | Requirement |
