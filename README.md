@@ -31,12 +31,42 @@
 ### Software Requirements
 
 **Functional Requirements**
-- *[Requirement 1]*
-- *[Requirement 2]*
+## Functional Requirements
+
+| ID | Requirement |
+| --- | --- |
+| FR-01 | Users should be able to create an account and profile. |
+| FR-02 | Collaborators should be able to list their skills and how experienced they are with them. |
+| FR-03 | Collaborators should be able to list their availability, commitment and what kind of projects they are interested in. |
+| FR-04 | Idea Makers should be able to post an idea and describe what they are building and how far along the project is. |
+| FR-05 | Idea Makers should be able to list what roles and skills they need for their project. |
+| FR-06 | The system should recommend suitable ideas to Collaborators based on skills, availability, interests and commitment. |
+| FR-07 | Collaborators should be shown ideas ranked by how well they fit their profile. |
+| FR-08 | Collaborators should be able to choose if they want to show interest in an idea. |
+| FR-09 | Idea Makers should be able to see Collaborators who have shown interest in their idea. |
+| FR-10 | Collaborators who have shown interest should be ranked by how well they fit the project. |
+| FR-11 | The system should explain why an idea or interested Collaborator got its ranking. |
+| FR-12 | Idea Makers should be able to change how important different parts of the ranking are, for example skills or availability. |
+| FR-13 | The ranking should change when the matching weights are changed. |
+| FR-14 | Idea Makers should be able to choose if they want to show interest in a Collaborator who has already shown interest in their idea. |
+| FR-15 | A match should only happen when both sides have chosen to show interest. |
+| FR-16 | Users should be able to chat after they have matched. |
+| FR-17 | Idea Makers should be able to choose what information about their idea is public and what information is only shown after mutual interest. |
+| FR-18 | Idea Makers should be able to see which skills are still missing from their team. |
 
 **Non-Functional Requirements**
-- *[Requirement 1]*
-- *[Requirement 2]*
+## Non-Functional Requirements
+
+| ID | Category | Requirement |
+| --- | --- | --- |
+| NFR-01 | Security | Users should not be able to see information they are not allowed to see. |
+| NFR-02 | Privacy | Private information about an idea should only be visible to users who are allowed to see it. |
+| NFR-03 | Privacy | A Collaborator's profile should not be visible to an Idea Maker unless the Collaborator has shown interest in that Idea Maker's project. |
+| NFR-04 | Privacy | Users should not be able to contact each other before both sides have shown interest. |
+| NFR-05 | Performance | The system should still work well when there are many ideas or interested Collaborators. |
+| NFR-06 | Performance | Long lists of ideas or interested Collaborators should be handled in a way that keeps the system usable. |
+| NFR-07 | Usability | Users should be able to understand why a match got its ranking. |
+| NFR-08 | Availability | The system should be available online as a web application. |
 
 ---
 
