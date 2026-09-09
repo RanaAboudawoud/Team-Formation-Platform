@@ -14,15 +14,13 @@
 
 ### User Personas
 
-## User Personas
-
-### Alice - Collaborator
+#### Alice - Collaborator
 
 | Name | Characteristics | Needs and Expectations | How will they use the system? |
 | --- | --- | --- | --- |
 | **Alice** | 24, CS major, intermediate at programming.<br><br>Knows JavaScript and Python.<br><br>Open to learning new techniques/languages.<br><br>Alice is nearing the end of her studies and wants practical experience but does not currently have a project idea of her own.<br><br>Has limited availability because of her studies. | Find a project she can contribute to and gain experience from.<br><br>Get relevant projects recommended based on her skills and availability.<br><br>Be able to understand why a project is a good match for her.<br><br>Not get contacted by people she has not shown interest in. | Create a profile and list her skills, programming languages, proficiency and availability.<br><br>Get recommended projects based on her profile.<br><br>Look through the recommendations and see why they match.<br><br>Express interest in one or multiple projects.<br><br>Start communicating with the Idea Maker if they both show interest. |
 
-### Stefan - Idea Maker
+#### Stefan - Idea Maker
 
 | Name | Characteristics | Needs and Expectations | How will they use the system? |
 | --- | --- | --- | --- |
@@ -30,7 +28,7 @@
 
 ### Software Requirements
 
-## Functional Requirements
+#### Functional Requirements
 
 | ID | Requirement |
 | --- | --- |
@@ -53,7 +51,7 @@
 | FR-17 | Idea Makers should be able to choose what information about their idea is public and what information is only shown after mutual interest. |
 | FR-18 | Idea Makers should be able to see which skills are still missing from their team. |
 
-## Non-Functional Requirements
+#### Non-Functional Requirements
 
 | ID | Category | Requirement |
 | --- | --- | --- |
