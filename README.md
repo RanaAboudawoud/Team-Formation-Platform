@@ -16,7 +16,34 @@
 
 | Name | Characteristics | Needs and Expectations | How will they use the system? |
 |---|---|---|---|
-| *[Name]* | *[Age, background, technical skill level, etc.]* | *[What they need from the system]* | *[How they'll interact with it]* |
+| *Alice* | *24, CS major, intermediate at programming. 
+Knows JavaScript and Python. 
+Open to learning new techniques/languages. 
+Alice is nearing the end of her studies and wants practical experience but does not currently have a project idea of her own. 
+Has limited availability because of her studies.* | *Find a project she can contribute to and gain experience from. 
+Get relevant projects recommended based on her skills and availability. 
+Be able to understand why a project is a good match for her. 
+Not get contacted by people she has not shown interest in.* | *Create a profile and list her skills, programming languages, proficiency and availability. 
+Get recommended projects based on her profile. 
+Look through the recommendations and see why they match. 
+Express interest in one or multiple projects. 
+Start communicating with the Idea Maker if they both show interest.* |
+
+| Name | Characteristics | Needs and Expectations | How will they use the system? |
+|---|---|---|---|
+| *[Stefan]* | *37, entrepreneur with experience in business development. 
+Has an idea for a digital service but does not have all the technical skills needed to build it. 
+Does not have suitable collaborators in his network. 
+Does not want to share too much about his idea before finding the right people.* | *Find people with the right skills and availability for his project. 
+See which candidates are the best match and why. 
+Be able to decide what is more important in the matching, for example skills or availability. 
+Control how much information about his idea is public.* | *Create a profile. 
+Make a post about his idea and what stage it is in. 
+List what roles and skills he needs. 
+See ranked candidates and why they match his project. 
+Change the matching priorities if needed. 
+See who has shown interest in his idea and show interest in suitable candidates. 
+Start communicating when the interest is mutual.* |
 
 ### Software Requirements
 
