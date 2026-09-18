@@ -12,3 +12,7 @@
 
 # Local SQLite database
 db.sqlite3
+
+__pycache__/
+*.pyc
+
