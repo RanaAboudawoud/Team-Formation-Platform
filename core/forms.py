@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 from .models import Profile
 
 class RegistrationForm(forms.Form):
@@ -12,3 +13,11 @@ class RegistrationForm(forms.Form):
         choices = Profile.ROLE_CHOICES,
         widget = forms.RadioSelect
         )
+
+    def clean_username(self):
+        username = self.cleaned_data["username"]
+
+        if User.objects.filter(username = username).exists():
+            raise forms.ValidationError("This username is already taken.")
+
+        return username
