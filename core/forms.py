@@ -22,6 +22,10 @@ class RegistrationForm(forms.Form):
 
         return username
 
+class LoginForm(forms.Form):
+    username = forms.CharField(max_length = 200)
+    password = forms.CharField(widget = forms.PasswordInput)
+
 class CollaboratorForm(forms.Form):
     skill = forms.ModelChoiceField(queryset = Skill.objects.all())
     proficiency = forms.ChoiceField(choices = Project_skill.PROFICIENCY_CHOICES)

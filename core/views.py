@@ -1,8 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 from .models import Project, Profile
-from .forms import RegistrationForm, CollaboratorForm
+from .forms import RegistrationForm, CollaboratorForm, LoginForm
 
 def home(request):
     return HttpResponse("Team Formation Platform")
@@ -31,6 +32,25 @@ def register(request):
         form = RegistrationForm()
 
     return render(request, "core/register.html", {"form": form})
+
+def login_view(request):
+    if request.method == "POST":
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password =  form.cleaned_data["password"]
+
+            user = authenticate(request, username = username, password = password)
+            if user is not None:
+                login(request, user)
+
+                return redirect("home")
+            else:
+                form.add_error(None, "Invalid username or password")
+    else:
+        form = LoginForm()
+
+    return render(request, "core/login.html", {"login_form": form})
 
 def collaborator_profile(request):
     form = CollaboratorForm()
