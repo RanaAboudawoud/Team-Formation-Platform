@@ -21,3 +21,6 @@ class RegistrationForm(forms.Form):
             raise forms.ValidationError("This username is already taken.")
 
         return username
+
+class CollaboratorForm(forms.Form):
+    pass

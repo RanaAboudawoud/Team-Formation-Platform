@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from .models import Project, Profile
-from .forms import RegistrationForm
+from .forms import RegistrationForm, CollaboratorForm
 
 def home(request):
     return HttpResponse("Team Formation Platform")
@@ -31,3 +31,8 @@ def register(request):
         form = RegistrationForm()
 
     return render(request, "core/register.html", {"form": form})
+
+def collaborator_profile(request):
+    form = CollaboratorForm()
+
+    return render(request, "core/collaborator_profile.html", {"collaborator_form": form})
