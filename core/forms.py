@@ -25,3 +25,4 @@ class RegistrationForm(forms.Form):
 class CollaboratorForm(forms.Form):
     skill = forms.ModelChoiceField(queryset = Skill.objects.all())
     proficiency = forms.ChoiceField(choices = Project_skill.PROFICIENCY_CHOICES)
+    availability = forms.IntegerField(min_value = 0)
