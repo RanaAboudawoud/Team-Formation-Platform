@@ -27,6 +27,9 @@ class Project(models.Model):
 class Skill(models.Model):
     name = models.CharField(max_length = 200)
 
+    def __str__(self):
+        return self.name
+
 class Project_skill(models.Model):
     project = models.ForeignKey(Project, on_delete = models.CASCADE)
     skill = models.ForeignKey(Skill, on_delete = models.CASCADE)
