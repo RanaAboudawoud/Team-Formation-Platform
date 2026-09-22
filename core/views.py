@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-from .models import Project, Profile
+from .models import Project, Profile, Collaborator_profile, Collaborator_skill
 from .forms import RegistrationForm, CollaboratorForm, LoginForm
 
 def home(request):
@@ -53,6 +53,25 @@ def login_view(request):
     return render(request, "core/login.html", {"login_form": form})
 
 def collaborator_profile(request):
-    form = CollaboratorForm()
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    if request.method == "POST":
+        form = CollaboratorForm(request.POST)
+        if form.is_valid():
+            skill = form.cleaned_data["skill"]
+            proficiency = form.cleaned_data["proficiency"]
+            availability = form.cleaned_data["availability"]
+
+            user = request.user
+
+            #Spara information från användare i respektive databas
+            profile = Profile.objects.get(user = user)
+            collaborator, created = Collaborator_profile.objects.update_or_create(profile = profile, defaults = {"availability": availability})
+            Collaborator_skill.objects.update_or_create(collaborator = collaborator, skill = skill, defaults = {"proficiency": proficiency})
+
+            return redirect("home")
+    else:
+        form = CollaboratorForm()
 
     return render(request, "core/collaborator_profile.html", {"collaborator_form": form})
