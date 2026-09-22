@@ -1,6 +1,7 @@
 <h1>Collaborator Profile</h1>
 
-<form>
+<form method = "post">
+    {% csrf_token %}
     {{ collaborator_form.as_p }}
     <button type = "submit">Create profile</button>
 </form>
