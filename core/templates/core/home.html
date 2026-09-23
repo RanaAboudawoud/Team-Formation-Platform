@@ -2,6 +2,14 @@
 
 {% for project, score in ranked_projects %}
 
-    <p>{{project.name}}, {{score}}</p>
+    <h2>{{project.name}}</h2>
+    <p>Match score: {% widthratio score 1 100 %}%</p>
+    <p>Required availability: {{project.req_hours}} hours/week</p>
+
+    {% for required_skill in project.project_skill_set.all %}
+        <p>
+            {{ required_skill.skill.name }} - {{ required_skill.get_required_proficiency_display }}
+        </p>
+    {% endfor %}
 
 {% endfor %}
