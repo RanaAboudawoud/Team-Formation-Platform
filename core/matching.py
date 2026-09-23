@@ -1,4 +1,5 @@
-from .models import Collaborator_skill, Project_skill, Collaborator_profile, Project
+from .models import Collaborator_skill, Project_skill, Project
+from operator import itemgetter
 
 proficiency_levels = {
     "beginner": 1, 
@@ -41,3 +42,24 @@ def calculate_availability_match(collaborator, project):
         return 1.0
     else:
         return collaborator_availability / project_req_availability
+
+def calculate_project_score(collaborator, project, skill_weight = 0.5, availability_weight = 0.5):
+    skill_match = calculate_skill_match(collaborator, project)
+    availability_match = calculate_availability_match(collaborator, project)
+
+    score = (skill_match * skill_weight) + (availability_match * availability_weight)
+
+    return score
+
+def rank_projects(collaborator):
+    projects = Project.objects.all()
+
+    ranked_projects = []
+
+    for project in projects:
+        score = calculate_project_score(collaborator, project)
+        ranked_projects.append((project, score))
+
+    ranked_projects.sort(key = itemgetter(1), reverse = True)
+
+    return ranked_projects
