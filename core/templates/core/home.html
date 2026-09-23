@@ -1,0 +1,7 @@
+<h1>Recommended projects</h1>
+
+{% for project, score in ranked_projects %}
+
+    <p>{{project.name}}, {{score}}</p>
+
+{% endfor %}
