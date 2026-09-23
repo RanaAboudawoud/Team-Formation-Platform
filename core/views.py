@@ -4,9 +4,21 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from .models import Project, Profile, Collaborator_profile, Collaborator_skill
 from .forms import RegistrationForm, CollaboratorForm, LoginForm
+from .matching import rank_projects
 
 def home(request):
-    return HttpResponse("Team Formation Platform")
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    try:
+        collaborator = Collaborator_profile.objects.get(profile__user = request.user)
+    except Collaborator_profile.DoesNotExist:
+        return redirect("collaborator_profile")
+
+    ranked_projects = rank_projects(collaborator)
+
+    return render(request, "core/home.html", {"ranked_projects": ranked_projects})
+
 
 def projects(request):
     projects = Project.objects.all()
@@ -27,7 +39,7 @@ def register(request):
             user = User.objects.create_user(username = username, email = email, password = password, first_name = first_name, last_name = last_name)
             Profile.objects.create(user = user, phone_number = phone_number, role = role)
 
-            return redirect("home")
+            return redirect("login")
     else:
         form = RegistrationForm()
 
