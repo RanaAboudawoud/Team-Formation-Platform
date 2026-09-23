@@ -1,4 +1,4 @@
-from .models import Collaborator_skill, Project_skill
+from .models import Collaborator_skill, Project_skill, Collaborator_profile, Project
 
 proficiency_levels = {
     "beginner": 1, 
@@ -32,3 +32,12 @@ def calculate_skill_match(collaborator, project):
         return 0.0
 
     return matched_req / total_req
+
+def calculate_availability_match(collaborator, project):
+    project_req_availability = project.req_hours
+    collaborator_availability = collaborator.availability
+
+    if collaborator_availability >= project_req_availability:
+        return 1.0
+    else:
+        return collaborator_availability / project_req_availability
