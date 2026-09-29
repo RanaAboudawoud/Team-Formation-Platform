@@ -91,19 +91,21 @@ def collaborator_profile(request):
 def idea_maker_profile(request):
     if not request.user.is_authenticated:
         return redirect("login")
+    
+    user = request.user
+    profile = Profile.objects.get(user = user)
+    idea_maker, created = Idea_maker_profile.objects.get_or_create(profile = profile)
 
     if request.method == "POST":
         form = IdeaMakerForm(request.POST)
         if form.is_valid():
             bio = form.cleaned_data["bio"]
 
-            user = request.user
-            profile = Profile.objects.get(user = user)
-            idea_maker, created = Idea_maker_profile.objects.update_or_create(profile = profile, defaults = {"bio": bio})
+            idea_maker.bio = bio
+            idea_maker.save()
 
-            return redirect("home")
-
+            return redirect("idea_maker_profile")
     else:
-        form = IdeaMakerForm()
+        form = IdeaMakerForm(initial = {"bio": idea_maker.bio})
 
-    return render(request, "core/idea_maker_profile.html", {"idea_maker_form": form})
+    return render(request, "core/idea_maker_profile.html", {"idea_maker_form": form, "idea_maker": idea_maker})

@@ -1,4 +1,6 @@
 <h1>Idea Maker</h1>
+<p>Bio: {{ idea_maker.bio }}</p>
+<p>Username: {{ idea_maker.profile.user.username }}</p>
 
 <form method = "post">
     {% csrf_token %}
