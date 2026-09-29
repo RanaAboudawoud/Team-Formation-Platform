@@ -20,6 +20,10 @@ class Collaborator_profile(models.Model):
     profile = models.OneToOneField(Profile, on_delete = models.CASCADE)
     availability = models.IntegerField()
 
+class Idea_maker_profile(models.Model):
+    profile = models.OneToOneField(Profile, on_delete = models.CASCADE)
+    bio = models.TextField(max_length = 1000, blank = True)
+
 class Project(models.Model):
     name = models.CharField(max_length = 200)
     req_hours = models.IntegerField()
