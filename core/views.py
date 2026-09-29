@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-from .models import Project, Profile, Collaborator_profile, Collaborator_skill
+from .models import Project, Profile, Collaborator_profile, Collaborator_skill, Idea_maker_profile
 from .forms import RegistrationForm, CollaboratorForm, LoginForm
 from .matching import rank_projects
 
@@ -87,3 +87,13 @@ def collaborator_profile(request):
         form = CollaboratorForm()
 
     return render(request, "core/collaborator_profile.html", {"collaborator_form": form})
+
+def idea_maker_profile(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    user = request.user
+    profile = Profile.objects.get(user = user)
+    idea_maker, created = Idea_maker_profile.objects.get_or_create(profile = profile)
+
+    return render(request, "core/idea_maker_profile.html")
