@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from .models import Project, Profile, Collaborator_profile, Collaborator_skill, Idea_maker_profile
-from .forms import RegistrationForm, CollaboratorForm, LoginForm
+from .forms import RegistrationForm, CollaboratorForm, LoginForm, IdeaMakerForm
 from .matching import rank_projects
 
 def home(request):
@@ -92,8 +92,18 @@ def idea_maker_profile(request):
     if not request.user.is_authenticated:
         return redirect("login")
 
-    user = request.user
-    profile = Profile.objects.get(user = user)
-    idea_maker, created = Idea_maker_profile.objects.get_or_create(profile = profile)
+    if request.method == "POST":
+        form = IdeaMakerForm(request.POST)
+        if form.is_valid():
+            bio = form.cleaned_data["bio"]
 
-    return render(request, "core/idea_maker_profile.html")
+            user = request.user
+            profile = Profile.objects.get(user = user)
+            idea_maker, created = Idea_maker_profile.objects.update_or_create(profile = profile, defaults = {"bio": bio})
+
+            return redirect("home")
+
+    else:
+        form = IdeaMakerForm()
+
+    return render(request, "core/idea_maker_profile.html", {"idea_maker_form": form})
