@@ -1,1 +1,7 @@
 <h1>Idea Maker</h1>
+
+<form method = "post">
+    {% csrf_token %}
+    {{ idea_maker_form.as_p }}
+    <button type = "submit">Save</button>
+</form>
