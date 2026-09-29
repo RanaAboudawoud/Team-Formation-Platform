@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .models import Project, Profile, Collaborator_profile, Collaborator_skill, Idea_maker_profile
 from .forms import RegistrationForm, CollaboratorForm, LoginForm, IdeaMakerForm
 from .matching import rank_projects
@@ -56,13 +56,22 @@ def login_view(request):
             if user is not None:
                 login(request, user)
 
-                return redirect("home")
+                profile = Profile.objects.get(user = user)
+
+                if profile.role == "idea_maker":
+                    return redirect("idea_maker_profile")
+                else:
+                    return redirect("home")
             else:
                 form.add_error(None, "Invalid username or password")
     else:
         form = LoginForm()
 
     return render(request, "core/login.html", {"login_form": form})
+
+def logout_view(request):
+    logout(request)
+    return redirect("login")
 
 def collaborator_profile(request):
     if not request.user.is_authenticated:
