@@ -60,9 +60,9 @@
 | NFR-03 | Privacy | A Collaborator's profile should not be visible to an Idea Maker unless the Collaborator has shown interest in that Idea Maker's project. |
 | NFR-04 | Privacy | Users should not be able to contact each other before both sides have shown interest. |
 | NFR-05 | Performance | The system should still work well when there are many ideas or interested Collaborators. |
-| NFR-06 | Performance | Long lists of ideas or interested Collaborators should be handled in a way that keeps the system usable. |
+| NFR-06 | Performance | Long lists of ideas or interested Collaborators should be handled in a way that keeps the system usable. If there are more than 20 then the list should be paginated|
 | NFR-07 | Usability | Users should be able to understand why a match got its ranking. |
-| NFR-08 | Availability | The system should be available online as a web application. |
+| NFR-08 | Availability | The system should be available online 99% of the time when deployed as a web application. |
 
 ---
 
