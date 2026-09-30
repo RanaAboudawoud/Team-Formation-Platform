@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .models import Project, Profile, Collaborator_profile, Collaborator_skill, Idea_maker_profile
-from .forms import RegistrationForm, CollaboratorForm, LoginForm, IdeaMakerForm
+from .forms import RegistrationForm, CollaboratorForm, LoginForm, IdeaMakerForm, ProjectForm
 from .matching import rank_projects
 
 def home(request):
@@ -118,3 +118,29 @@ def idea_maker_profile(request):
         form = IdeaMakerForm(initial = {"bio": idea_maker.bio})
 
     return render(request, "core/idea_maker_profile.html", {"idea_maker_form": form, "idea_maker": idea_maker})
+
+def create_project(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    user = request.user
+    profile = Profile.objects.get(user = user)
+    idea_maker = Idea_maker_profile.objects.get(profile = profile)
+
+    if request.method == "POST":
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data["name"]
+            req_hours = form.cleaned_data["req_hours"]
+            description = form.cleaned_data["description"]
+            category = form.cleaned_data["category"]
+            compensation = form.cleaned_data["compensation"]
+            stage = form.cleaned_data["stage"]
+
+            Project.objects.create(name = name, req_hours = req_hours, description = description, category = category, compensation = compensation, stage = stage, idea_maker = idea_maker)
+
+            return redirect("idea_maker_profile")
+    else:
+        form = ProjectForm()
+
+    return render(request, "core/create_project.html", {"project_form": form})

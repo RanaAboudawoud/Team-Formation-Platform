@@ -9,4 +9,5 @@ urlpatterns = [
     path("logout/", views.logout_view, name = "logout"),
     path("collaborator_profile/", views.collaborator_profile, name = "collaborator_profile"),
     path("idea_maker_profile/", views.idea_maker_profile, name = "idea_maker_profile"),
+    path("create_project/", views.create_project, name = "create_project"),
 ]

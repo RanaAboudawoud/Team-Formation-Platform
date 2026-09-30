@@ -26,7 +26,6 @@ class Idea_maker_profile(models.Model):
 
 class Project(models.Model):
     name = models.CharField(max_length = 200)
-    req_hours = models.IntegerField()
     description = models.TextField(max_length = 1000)
 
     CATEGORY_CHOICES = [
@@ -57,6 +56,15 @@ class Project(models.Model):
         ("negotiable", "To Be Discussed"),
     ]
 
+    REQ_HOURS_CHOICES = [
+        (5, "1-5 hours/week"),
+        (10, "5-10 hours/week"),
+        (15, "10-15 hours/week"),
+        (20, "15-20 hours/week"),
+        (25, "20+ hours/week"),
+    ]
+
+    req_hours = models.IntegerField(choices = REQ_HOURS_CHOICES)
     category = models.CharField(max_length = 100, choices = CATEGORY_CHOICES)
     stage = models.CharField(max_length = 100, choices = STAGE_CHOICES)
     compensation = models.CharField(max_length = 100, choices = COMPENSATION_CHOICES)
