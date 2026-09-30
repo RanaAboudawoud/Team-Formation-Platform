@@ -29,6 +29,38 @@ class Project(models.Model):
     req_hours = models.IntegerField()
     description = models.TextField(max_length = 1000)
 
+    CATEGORY_CHOICES = [
+        ("technology", "Technology"),
+        ("marketing", "Marketing"),
+        ("writing", "Writing & Content"),
+        ("design", "Design"),
+        ("business", "Business"),
+        ("education", "Education"),
+        ("health", "Health & Wellness"),
+        ("environment", "Environment & Sustainability"),
+        ("media", "Media & Entertainment"),
+        ("other", "Other"),
+    ]
+
+    STAGE_CHOICES = [
+        ("idea", "Idea"),
+        ("planning", "Planning"),
+        ("in_development", "In Development"),
+        ("launched", "Launched"),
+    ]
+
+    COMPENSATION_CHOICES = [
+        ("salary", "Salary"),
+        ("equity", "Equity (Ownership)"),
+        ("revenue_sharing", "Revenue Sharing"),
+        ("volunteer", "Volunteer / Unpaid"),
+        ("negotiable", "To Be Discussed"),
+    ]
+
+    category = models.CharField(max_length = 100, choices = CATEGORY_CHOICES)
+    stage = models.CharField(max_length = 100, choices = STAGE_CHOICES)
+    compensation = models.CharField(max_length = 100, choices = COMPENSATION_CHOICES)
+
     idea_maker = models.ForeignKey(Idea_maker_profile, on_delete = models.CASCADE)
 
 class Skill(models.Model):

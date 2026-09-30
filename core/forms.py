@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile, Skill, Collaborator_skill, Project_skill
+from .models import Profile, Skill, Collaborator_skill, Project_skill, Project
 
 class RegistrationForm(forms.Form):
     first_name = forms.CharField(max_length=200)
@@ -33,3 +33,12 @@ class CollaboratorForm(forms.Form):
 
 class IdeaMakerForm(forms.Form):
     bio = forms.CharField(widget = forms.Textarea, max_length = 1000)
+
+class ProjectForm(forms.Form):
+    name = forms.CharField(max_length = 200)
+    req_hours = forms.IntegerField(min_value = 0)
+    description = forms.CharField(max_length = 1000, widget = forms.Textarea)
+
+    category = forms.ChoiceField(choices = Project.CATEGORY_CHOICES)
+    compensation = forms.ChoiceField(choices = Project.COMPENSATION_CHOICES)
+    stage = forms.ChoiceField(choices = Project.STAGE_CHOICES)
