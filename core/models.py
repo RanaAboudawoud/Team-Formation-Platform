@@ -27,6 +27,9 @@ class Idea_maker_profile(models.Model):
 class Project(models.Model):
     name = models.CharField(max_length = 200)
     req_hours = models.IntegerField()
+    description = models.TextField(max_length = 1000)
+
+    idea_maker = models.ForeignKey(Idea_maker_profile, on_delete = models.CASCADE)
 
 class Skill(models.Model):
     name = models.CharField(max_length = 200)
