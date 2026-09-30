@@ -104,6 +104,7 @@ def idea_maker_profile(request):
     user = request.user
     profile = Profile.objects.get(user = user)
     idea_maker, created = Idea_maker_profile.objects.get_or_create(profile = profile)
+    projects = Project.objects.filter(idea_maker = idea_maker)
 
     if request.method == "POST":
         form = IdeaMakerForm(request.POST)
@@ -117,7 +118,7 @@ def idea_maker_profile(request):
     else:
         form = IdeaMakerForm(initial = {"bio": idea_maker.bio})
 
-    return render(request, "core/idea_maker_profile.html", {"idea_maker_form": form, "idea_maker": idea_maker})
+    return render(request, "core/idea_maker_profile.html", {"idea_maker_form": form, "idea_maker": idea_maker, "projects": projects})
 
 def create_project(request):
     if not request.user.is_authenticated:
@@ -144,3 +145,17 @@ def create_project(request):
         form = ProjectForm()
 
     return render(request, "core/create_project.html", {"project_form": form})
+
+def delete_project(request, project_id):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    user = request.user
+    profile = Profile.objects.get(user = user)
+    idea_maker = Idea_maker_profile.objects.get(profile = profile)
+
+    project = Project.objects.get(idea_maker = idea_maker, id = project_id)
+
+    project.delete()
+
+    return redirect('idea_maker_profile')
