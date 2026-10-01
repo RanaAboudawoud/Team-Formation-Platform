@@ -1,3 +1,7 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
 <h1>Collaborator Profile</h1>
 
 <form method = "post">
@@ -5,3 +9,5 @@
     {{ collaborator_form.as_p }}
     <button type = "submit">Create profile</button>
 </form>
+
+{% endblock %}

@@ -1,3 +1,7 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
 <h1>Create Project</h1>
 
 <form method = "post">
@@ -5,3 +9,5 @@
     {{ project_form.as_p }}
     <button type = "submit">Create Project</button>
 </form>
+
+{% endblock %}
