@@ -10,16 +10,6 @@ def home(request):
     if not request.user.is_authenticated:
         return redirect("login")
 
-    try:
-        collaborator = Collaborator_profile.objects.get(profile__user = request.user)
-    except Collaborator_profile.DoesNotExist:
-        return redirect("collaborator_profile")
-
-    ranked_projects = rank_projects(collaborator)
-
-    return render(request, "core/home.html", {"ranked_projects": ranked_projects})
-
-
 def projects(request):
     projects = Project.objects.all()
     return render(request, "core/projects.html", {"projects": projects})
@@ -61,7 +51,7 @@ def login_view(request):
                 if profile.role == "idea_maker":
                     return redirect("idea_maker_profile")
                 else:
-                    return redirect("home")
+                    return redirect("collaborator")
             else:
                 form.add_error(None, "Invalid username or password")
     else:
@@ -72,6 +62,19 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect("login")
+
+def collaborator_view(request):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    try:
+        collaborator = Collaborator_profile.objects.get(profile__user = request.user)
+    except Collaborator_profile.DoesNotExist:
+        return redirect("collaborator_profile")
+    
+    ranked_projects = rank_projects(collaborator)
+    
+    return render(request, "core/collaborator.html", {"ranked_projects": ranked_projects})
 
 def collaborator_profile(request):
     if not request.user.is_authenticated:
@@ -91,7 +94,7 @@ def collaborator_profile(request):
             collaborator, created = Collaborator_profile.objects.update_or_create(profile = profile, defaults = {"availability": availability})
             Collaborator_skill.objects.update_or_create(collaborator = collaborator, skill = skill, defaults = {"proficiency": proficiency})
 
-            return redirect("home")
+            return redirect("collaborator")
     else:
         form = CollaboratorForm()
 
