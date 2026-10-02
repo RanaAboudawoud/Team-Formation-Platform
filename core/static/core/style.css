@@ -1,0 +1,53 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eef4f9;
+}
+
+.auth-container {
+    width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: white;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+}
+
+.auth-container input:not([type = "radio"]) {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #f6fafd;
+    box-sizing: border-box;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+}
+
+.auth-container button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    width: 100%;
+    background-color: #14213D;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.auth-container h1 {
+    color: #14213D;
+    margin-bottom: 25px;
+}
+
+.auth-container label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.auth-container p {
+    margin-bottom: 15px;
+}
+
+.auth-container a {
+    color: #16305c;
+    text-decoration: none;
+}
