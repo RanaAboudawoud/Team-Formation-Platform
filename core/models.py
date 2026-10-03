@@ -71,6 +71,13 @@ class Project(models.Model):
 
     idea_maker = models.ForeignKey(Idea_maker_profile, on_delete = models.CASCADE)
 
+class Project_role(models.Model):
+    project = models.ForeignKey(Project, on_delete = models.CASCADE)
+    name = models.CharField(max_length = 200)
+
+    def __str__(self):
+        return self.name
+
 class Skill(models.Model):
     name = models.CharField(max_length = 200)
 
