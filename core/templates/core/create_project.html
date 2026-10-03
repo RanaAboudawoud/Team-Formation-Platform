@@ -2,12 +2,16 @@
 
 {% block content %}
 
-<h1>Create Project</h1>
+<div class = "create-project-container">
 
-<form method = "post">
-    {% csrf_token %}
-    {{ project_form.as_p }}
-    <button type = "submit">Create Project</button>
-</form>
+    <h1>Create Project</h1>
+
+    <form method = "post">
+        {% csrf_token %}
+        {{ project_form.as_p }}
+        <button type = "submit">Create Project</button>
+    </form>
+
+</div>
 
 {% endblock %}
