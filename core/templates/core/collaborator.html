@@ -2,25 +2,39 @@
 
 {% block content %}
 
-<h1>Recommended projects</h1>
+<div class = "collaborator-container">
 
-{% for project, score in ranked_projects %}
+    <h1>Recommended projects</h1>
 
-    <h2>{{project.name}}</h2>
+    {% for project, score in ranked_projects %}
+
+    <div class = "project-card">
+
+        <h2>{{project.name}}</h2>
+        
+        <p class = "project-description"> <span class = "project-label">Description: </span>{{project.description}}</p>
     
-    <p>Description: {{project.description}}</p>
-    <p>Category: {{project.get_category_display}}</p>
-    <p>Stage: {{project.get_stage_display}}</p>
-    <p>Compensation: {{project.get_compensation_display}}</p>
-    <p>Expected commitment: {{project.get_req_hours_display}}</p>
-    
-    <p>Match score: {% widthratio score 1 100 %}%</p>
-    {% for required_skill in project.project_skill_set.all %}
-        <p>
-            {{ required_skill.skill.name }} - {{ required_skill.get_required_proficiency_display }}
-        </p>
+        <div class = "project-meta">
+
+            <p> <span class = "project-label">Category: </span>{{project.get_category_display}}</p>
+            <p> <span class = "project-label">Stage: </span>{{project.get_stage_display}}</p>
+            <p> <span class = "project-label">Compensation: </span>{{project.get_compensation_display}}</p>
+            <p> <span class = "project-label">Expected commitment: </span>{{project.get_req_hours_display}}</p>
+            <p> <span class = "project-label">Match score: </span>{% widthratio score 1 100 %}%</p>
+
+        </div>
+
+        
+        {% for required_skill in project.project_skill_set.all %}
+            <p class = "required-skill">
+                {{ required_skill.skill.name }} - {{ required_skill.get_required_proficiency_display }}
+            </p>
+        {% endfor %}
+
+    </div>
+
     {% endfor %}
 
-{% endfor %}
+</div>
 
 {% endblock %}

@@ -1,13 +1,40 @@
 {% extends "core/base.html" %}
+{% load static %}
 
 {% block content %}
 
-<h1>Collaborator Profile</h1>
+<div class = "profile-container">
 
-<form method = "post">
-    {% csrf_token %}
-    {{ collaborator_form.as_p }}
-    <button type = "submit">Create profile</button>
-</form>
+    <h1>Collaborator Profile</h1>
+
+    <p class = "profile-description">Add your skills and availability to help us find projects that match you.</p>
+
+    <form method = "post">
+        {% csrf_token %}
+        {{ collaborator_form.as_p }}
+
+        {{ skill_formset.management_form }}
+
+        <div id = "skill-forms">
+
+            {% for skill_form in skill_formset %}
+                <div class = "skill-form">
+                    {{ skill_form.as_p }}
+                </div>
+            {% endfor %}
+
+            <button type = "button" id = "add-skill">Add skill</button>
+            <button type = "button" id = "remove-skill">Remove skill</button>
+
+        </div>
+
+        <button type = "submit">Create profile</button>
+    </form>
+
+</div>
 
 {% endblock %}
+
+{% block scripts %}
+    <script src = "{% static 'core/collaborator_profile.js' %}"></script>
+{% endblock%}

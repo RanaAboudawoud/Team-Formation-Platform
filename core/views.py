@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
 from .models import Project, Profile, Collaborator_profile, Collaborator_skill, Idea_maker_profile
-from .forms import RegistrationForm, CollaboratorForm, LoginForm, IdeaMakerForm, ProjectForm
+from . import forms
 from .matching import rank_projects
 
 def home(request):
@@ -16,7 +16,7 @@ def projects(request):
 
 def register(request):
     if request.method == "POST":
-        form = RegistrationForm(request.POST)
+        form = forms.RegistrationForm(request.POST)
         if form.is_valid():
             first_name = form.cleaned_data["first_name"]
             last_name = form.cleaned_data["last_name"]
@@ -31,13 +31,13 @@ def register(request):
 
             return redirect("login")
     else:
-        form = RegistrationForm()
+        form = forms.RegistrationForm()
 
     return render(request, "core/register.html", {"form": form})
 
 def login_view(request):
     if request.method == "POST":
-        form = LoginForm(request.POST)
+        form = forms.LoginForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data["username"]
             password =  form.cleaned_data["password"]
@@ -55,7 +55,7 @@ def login_view(request):
             else:
                 form.add_error(None, "Invalid username or password")
     else:
-        form = LoginForm()
+        form = forms.LoginForm()
 
     return render(request, "core/login.html", {"login_form": form})
 
@@ -81,10 +81,10 @@ def collaborator_profile(request):
         return redirect("login")
 
     if request.method == "POST":
-        form = CollaboratorForm(request.POST)
-        if form.is_valid():
-            skill = form.cleaned_data["skill"]
-            proficiency = form.cleaned_data["proficiency"]
+        form = forms.CollaboratorForm(request.POST)
+        skill_formset = forms.CollaboratorSkillFormSet(request.POST)
+
+        if form.is_valid() and skill_formset.is_valid():
             availability = form.cleaned_data["availability"]
 
             user = request.user
@@ -92,13 +92,20 @@ def collaborator_profile(request):
             #Spara information från användare i respektive databas
             profile = Profile.objects.get(user = user)
             collaborator, created = Collaborator_profile.objects.update_or_create(profile = profile, defaults = {"availability": availability})
-            Collaborator_skill.objects.update_or_create(collaborator = collaborator, skill = skill, defaults = {"proficiency": proficiency})
+
+            for skill_form in skill_formset:
+                if skill_form.cleaned_data:
+                    skill = skill_form.cleaned_data["skill"]
+                    proficiency = skill_form.cleaned_data["proficiency"]
+
+                    Collaborator_skill.objects.update_or_create(collaborator = collaborator, skill = skill, defaults = {"proficiency": proficiency})
 
             return redirect("collaborator")
     else:
-        form = CollaboratorForm()
+        form = forms.CollaboratorForm()
+        skill_formset = forms.CollaboratorSkillFormSet()
 
-    return render(request, "core/collaborator_profile.html", {"collaborator_form": form})
+    return render(request, "core/collaborator_profile.html", {"collaborator_form": form, "skill_formset": skill_formset})
 
 def idea_maker_profile(request):
     if not request.user.is_authenticated:
@@ -110,7 +117,7 @@ def idea_maker_profile(request):
     projects = Project.objects.filter(idea_maker = idea_maker)
 
     if request.method == "POST":
-        form = IdeaMakerForm(request.POST)
+        form = forms.IdeaMakerForm(request.POST)
         if form.is_valid():
             bio = form.cleaned_data["bio"]
 
@@ -119,7 +126,7 @@ def idea_maker_profile(request):
 
             return redirect("idea_maker_profile")
     else:
-        form = IdeaMakerForm(initial = {"bio": idea_maker.bio})
+        form = forms.IdeaMakerForm(initial = {"bio": idea_maker.bio})
 
     return render(request, "core/idea_maker_profile.html", {"idea_maker_form": form, "idea_maker": idea_maker, "projects": projects})
 
@@ -132,7 +139,7 @@ def create_project(request):
     idea_maker = Idea_maker_profile.objects.get(profile = profile)
 
     if request.method == "POST":
-        form = ProjectForm(request.POST)
+        form = forms.ProjectForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data["name"]
             req_hours = form.cleaned_data["req_hours"]
@@ -145,7 +152,7 @@ def create_project(request):
 
             return redirect("idea_maker_profile")
     else:
-        form = ProjectForm()
+        form = forms.ProjectForm()
 
     return render(request, "core/create_project.html", {"project_form": form})
 

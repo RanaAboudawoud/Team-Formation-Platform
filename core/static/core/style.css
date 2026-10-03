@@ -1,7 +1,10 @@
+/* Global */
 body {
     font-family: Arial, sans-serif;
     background-color: #eef4f9;
 }
+
+/* Authentication pages */
 
 .auth-container {
     width: 400px;
@@ -10,6 +13,20 @@ body {
     background-color: white;
     border: 1px solid #d9e0e8;
     border-radius: 6px;
+}
+
+.auth-container h1 {
+    color: #14213D;
+    margin-bottom: 25px;
+}
+
+.auth-container p {
+    margin-bottom: 15px;
+}
+
+.auth-container label {
+    display: block;
+    margin-bottom: 5px;
 }
 
 .auth-container input:not([type = "radio"]) {
@@ -33,21 +50,130 @@ body {
     border-radius: 6px;
 }
 
-.auth-container h1 {
+.auth-container a {
+    color: #16305c;
+    text-decoration: none;
+}
+
+/* Collaborator projects page */
+
+.collaborator-container {
+    background-color: transparent;
+    border: none;
+    border-radius: 6px;
+    width: 80%;
+    margin: 30px auto;
+    padding: 30px;
+}
+
+.collaborator-container h1 {
     color: #14213D;
     margin-bottom: 25px;
 }
 
-.auth-container label {
-    display: block;
-    margin-bottom: 5px;
+/* Project cards */
+
+.project-card {
+    background-color: white;
+    border: 1px solid #d9e0e8;
+    border-left: 4px solid #0d2281;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
-.auth-container p {
-    margin-bottom: 15px;
+.project-card h2 {
+    color: #0d2281;
+    margin-top: 0;
+    margin-bottom: 8px;
 }
 
-.auth-container a {
-    color: #16305c;
-    text-decoration: none;
+.project-card p {
+    margin: 8px 0;
+    color: #14213D;
+}
+
+.project-label {
+    font-weight: bold;
+}
+
+/* Project metadata */
+
+.project-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.project-meta p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.required-skill {
+    display: inline-block;
+    margin: 5px 5px 0 0;
+    padding: 6px 10px;
+    background-color: #eef4f9;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.project-card .project-description {
+    color: #53627a;
+    margin-bottom: 16px;
+}
+
+/* Collaborator profile page */
+
+.profile-container {
+    width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: white;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+}
+
+.profile-container h1 {
+    color: #14213D;
+    margin-bottom: 35px;
+    border-bottom: 2px solid #d9e0e8;
+    padding-bottom: 15px;
+}
+
+.profile-container p {
+    margin-bottom: 20px;
+}
+
+.profile-container label {
+    display: inline-block;
+    min-width: 110px;
+}
+
+.profile-container select, .profile-container input {
+    width: 200px;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #f6fafd;
+    box-sizing: border-box;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+}
+
+.profile-container button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #14213D;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.profile-description {
+    color: #53627a;
+    margin-bottom: 30px;
+    font-size: 16px;
 }
