@@ -72,17 +72,66 @@ class Project(models.Model):
     idea_maker = models.ForeignKey(Idea_maker_profile, on_delete = models.CASCADE)
 
 class Project_role(models.Model):
+    ROLE_CHOICES = [
+        ("software_developer", "Software Developer"),
+        ("web_developer", "Web Developer"),
+        ("data_analyst", "Data Analyst"),
+        ("ui_ux_designer", "UI/UX Designer"),
+        ("graphic_designer", "Graphic Designer"),
+        ("marketing_specialist", "Marketing Specialist"),
+        ("content_writer", "Content Writer"),
+        ("business_developer", "Business Developer"),
+        ("project_manager", "Project Manager"),
+        ("educator_trainer", "Educator / Trainer"),
+        ("health_specialist", "Health & Wellnes Specialist"),
+        ("sustainability_specialist", "Sustainability Specialist"),
+        ("media_producer", "Media Producer"),
+        ("researcher", "Researcher"),
+        ("consultant", "Consultant"),
+        ("other", "Other"),
+    ]
+
     project = models.ForeignKey(Project, on_delete = models.CASCADE)
-    name = models.CharField(max_length = 200)
+    role = models.CharField(max_length = 200, choices = ROLE_CHOICES)
 
     def __str__(self):
-        return self.name
+        return self.get_role_display()
 
 class Skill(models.Model):
-    name = models.CharField(max_length = 200)
+    SKILL_CHOICES = [
+        ("python", "Python"),
+        ("javascript", "JavaScript"),
+        ("java", "Java"),
+        ("html_css", "HTML & CSS"),
+        ("django", "Django"),
+        ("react", "React"),
+        ("game_development", "Game Development"),
+        ("sql", "SQL"),
+        ("data_analysis", "Data Analysis"),
+        ("machine_learning", "Machine Learning"),
+        ("ui_ux_design", "UI/UX Design"),
+        ("graphic_design", "Graphic Design"),
+        ("figma", "Figma"),
+        ("digital_marketing", "Digital Marketing"),
+        ("social_media", "Social Media"),
+        ("seo", "SEO"),
+        ("content_writing", "Content Writing"),
+        ("copywriting", "Copywriting"),
+        ("business_strategy", "Business Strategy"),
+        ("project_management", "Project Management"),
+        ("sales", "Sales"),
+        ("research", "Research"),
+        ("teaching", "Teaching"),
+        ("health_wellness", "Health & Wellness"),
+        ("sustainability", "Sustainability"),
+        ("video_production", "Video Production"),
+        ("communication", "Communication"),
+    ]
+
+    name = models.CharField(max_length = 200, choices = SKILL_CHOICES, unique = True)
 
     def __str__(self):
-        return self.name
+        return self.get_name_display()
 
 class Project_skill(models.Model):
     project_role = models.ForeignKey(Project_role, on_delete = models.CASCADE)

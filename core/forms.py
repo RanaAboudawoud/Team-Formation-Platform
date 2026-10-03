@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile, Skill, Collaborator_skill, Project_skill, Project
+from .models import Profile, Skill, Collaborator_skill, Project_skill, Project, Project_role
 
 class RegistrationForm(forms.Form):
     first_name = forms.CharField(max_length=200)
@@ -45,3 +45,13 @@ class ProjectForm(forms.Form):
     category = forms.ChoiceField(choices = Project.CATEGORY_CHOICES)
     compensation = forms.ChoiceField(choices = Project.COMPENSATION_CHOICES)
     stage = forms.ChoiceField(choices = Project.STAGE_CHOICES)
+
+class ProjectRoleForm(forms.Form):
+    role = forms.ChoiceField(choices = Project_role.ROLE_CHOICES)
+
+class ProjectSkillForm(forms.Form):
+    skill = forms.ModelChoiceField(queryset = Skill.objects.all())
+    required_proficiency = forms.ChoiceField(choices = Project_skill.PROFICIENCY_CHOICES)
+
+
+ProjectSkillFormSet = forms.formset_factory(ProjectSkillForm, extra = 1)
