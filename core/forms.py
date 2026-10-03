@@ -27,9 +27,13 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget = forms.PasswordInput)
 
 class CollaboratorForm(forms.Form):
+    availability = forms.IntegerField(min_value = 0)
+
+class CollaboratorSkillForm(forms.Form):
     skill = forms.ModelChoiceField(queryset = Skill.objects.all())
     proficiency = forms.ChoiceField(choices = Project_skill.PROFICIENCY_CHOICES)
-    availability = forms.IntegerField(min_value = 0)
+
+CollaboratorSkillFormSet = forms.formset_factory(CollaboratorSkillForm, extra = 1)
 
 class IdeaMakerForm(forms.Form):
     bio = forms.CharField(widget = forms.Textarea, max_length = 1000)
