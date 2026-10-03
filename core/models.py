@@ -85,7 +85,7 @@ class Skill(models.Model):
         return self.name
 
 class Project_skill(models.Model):
-    project = models.ForeignKey(Project, on_delete = models.CASCADE)
+    project_role = models.ForeignKey(Project_role, on_delete = models.CASCADE)
     skill = models.ForeignKey(Skill, on_delete = models.CASCADE)
 
     PROFICIENCY_CHOICES = [
