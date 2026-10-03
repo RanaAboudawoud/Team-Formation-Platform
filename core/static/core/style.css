@@ -177,3 +177,135 @@ body {
     margin-bottom: 30px;
     font-size: 16px;
 }
+
+/* Idea maker page */
+
+.idea-maker-container {
+    width: 80%;
+    margin: 30px auto;
+    padding: 30px;
+}
+
+.idea-maker-container h1 {
+    color: #14213D;
+    margin-bottom: 25px;
+}
+
+.idea-maker-container h2 {
+    color: #14213D;
+    margin-bottom: 15px;
+}
+
+.idea-maker-profile-card {
+    background-color: white;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+    padding: 30px;
+    margin-bottom: 30px;
+}
+
+.idea-maker-username {
+    margin-top: -15px;
+    margin-bottom: 25px;
+    color: #53627a;
+    font-style: italic;
+    font-size: 16px;
+}
+
+.idea-maker-profile-card label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.idea-maker-profile-card textarea {
+    width: 100%;
+    height: 120px;
+    padding: 10px;
+    background-color: #f6fafd;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.idea-maker-profile-card button {
+    padding: 10px 20px;
+    background-color: #14213D;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.create-project-link {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    background-color: #14213D;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+.idea-maker-project-card {
+    background-color: white;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+    border-left: 4px solid #0d2281;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.idea-maker-project-card h3 {
+    color: #0d2281;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.delete-project-link {
+    color: #8b1e1e;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* create project page */
+
+.create-project-container {
+    width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: white;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+}
+
+.create-project-container h1 {
+    color: #14213D;
+    margin-bottom: 30px;
+}
+
+.create-project-container input, .create-project-container select, .create-project-container textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #f6fafd;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.create-project-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.create-project-container button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #14213D;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
