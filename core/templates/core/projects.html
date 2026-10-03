@@ -11,7 +11,29 @@
     <h1>Projects</h1>
 
     {% for project in projects %}
-        <p>{{ project.name }}</p>
+
+        <div class = "project-display-card">
+
+            <h2>{{ project.name }}</h2>
+
+            <p>{{ project.description }}</p>
+
+            <div class = "project-display-meta">
+
+                <p>
+                    <strong>Category: </strong>
+                    {{ project.get_category_display }}
+                </p>
+
+                <p>
+                    <strong>Stage: </strong>
+                    {{ project.get_stage_display }}
+                </p>
+
+            </div>
+
+        </div>
+
     {% endfor %}
 
 </body>
