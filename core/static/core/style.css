@@ -2,6 +2,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: #eef4f9;
+    margin: 0;
 }
 
 /* Authentication pages */
@@ -378,4 +379,24 @@ body {
     color: white;
     text-decoration: none;
     border-radius: 6px;
+}
+
+/* Navigation bar */
+
+.main-nav {
+    background-color: #14213D;
+    padding: 15px 30px;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.main-nav a:last-child {
+    margin-left: auto;
 }
