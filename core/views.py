@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .models import Project, Profile, Collaborator_profile, Collaborator_skill, Idea_maker_profile
+from .models import Project, Profile, Collaborator_profile, Collaborator_skill, Idea_maker_profile, Project_role, Project_skill
 from . import forms
 from .matching import rank_projects
 
@@ -150,14 +150,47 @@ def create_project(request):
             compensation = form.cleaned_data["compensation"]
             stage = form.cleaned_data["stage"]
 
-            Project.objects.create(name = name, req_hours = req_hours, description = description, category = category, compensation = compensation, stage = stage, idea_maker = idea_maker)
+            project = Project.objects.create(name = name, req_hours = req_hours, description = description, category = category, compensation = compensation, stage = stage, idea_maker = idea_maker)
 
-            return redirect("idea_maker_profile")
+            return redirect("project_requirements", project_id = project.id)
     else:
         form = forms.ProjectForm()
 
     return render(request, "core/create_project.html", {"project_form": form})
 
+def project_requirements(request, project_id):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    user = request.user
+    profile = Profile.objects.get(user = user)
+    idea_maker = Idea_maker_profile.objects.get(profile = profile)
+
+    project = Project.objects.get(id = project_id, idea_maker = idea_maker)
+
+    if request.method == "POST":
+        role_form = forms.ProjectRoleForm(request.POST)
+        skill_formset = forms.ProjectSkillFormSet(request.POST)
+
+        if role_form.is_valid() and skill_formset.is_valid():
+            role = role_form.cleaned_data["role"]
+
+            project_role, created = Project_role.objects.get_or_create(project = project, role = role)
+
+            for skill_form in skill_formset:
+                if skill_form.cleaned_data:
+                    skill = skill_form.cleaned_data["skill"]
+                    required_proficiency = skill_form.cleaned_data["required_proficiency"]
+
+                    Project_skill.objects.update_or_create(project_role = project_role, skill = skill, defaults = {"required_proficiency": required_proficiency})
+
+            return redirect("project_requirements", project_id = project.id)
+    else:
+        role_form = forms.ProjectRoleForm()
+        skill_formset = forms.ProjectSkillFormSet()
+
+    return render(request, "core/project_requirements.html", {"project": project, "role_form": role_form, "skill_formset": skill_formset})
+    
 def delete_project(request, project_id):
     if not request.user.is_authenticated:
         return redirect("login")
