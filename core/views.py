@@ -10,6 +10,8 @@ def home(request):
     if not request.user.is_authenticated:
         return redirect("login")
 
+    return render(request, "core/home.html")
+
 def projects(request):
     projects = Project.objects.all()
     return render(request, "core/projects.html", {"projects": projects})

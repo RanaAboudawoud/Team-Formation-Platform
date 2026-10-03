@@ -347,3 +347,35 @@ body {
     margin-bottom: 0;
     font-size: 14px;
 }
+
+/* Home page */
+
+.home-container {
+    width: 80%;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.home-container h1 {
+    color: #14213D;
+    margin-bottom: 15px;
+}
+
+.home-container p {
+    color: #53627a;
+    margin-bottom: 30px;
+}
+
+.home-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.home-actions a {
+    padding: 10px 20px;
+    background-color: #14213D;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
