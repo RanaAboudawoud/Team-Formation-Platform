@@ -309,3 +309,41 @@ body {
     border-radius: 6px;
     cursor: pointer;
 }
+
+/* Projects page */
+
+.projects-container {
+    width: 80%;
+    margin: 30px auto;
+    padding: 30px;
+}
+
+.projects-container h1 {
+    color: #14213D;
+    margin-bottom: 25px;
+}
+
+.project-display-card {
+    background-color: white;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+    border-left: 4px solid #0d2281;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.project-display-card h2 {
+    color: #0d2281;
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+
+.project-display-meta {
+    display: flex;
+    gap: 20px;
+}
+
+.project-display-meta p {
+    margin-bottom: 0;
+    font-size: 14px;
+}
