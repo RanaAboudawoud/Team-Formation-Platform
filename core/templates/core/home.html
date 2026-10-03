@@ -1,7 +1,15 @@
-{% extends "core.base.html "%}
+{% extends "core/base.html"%}
 
 {% block content %}
 
+<div class = "home-container">
+    <h1>Welcome to Team Formation Platform</h1>
+    <p>Find projects, build teams and connect with collaborators.</p>
 
+    <div class = "home-actions">
+        <a href = "{% url 'collaborator_profile' %}">Collaborator Profile</a>
+        <a href = "{% url 'idea_maker_profile' %}">Idea Maker Profile</a>
+    </div>
+</div>
 
 {% endblock %}
