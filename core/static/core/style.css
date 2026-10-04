@@ -111,6 +111,33 @@ body {
     font-size: 14px;
 }
 
+.match-level {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+.match-very-bad {
+    background-color: #f8d7da;
+    color: #8b1e1e;
+}
+
+.match-bad {
+    background-color: #fde2c5;
+    color: #9a4d00;
+}
+
+.match-good {
+    background-color: #fff3cd;
+    color: #6b5a00;
+}
+
+.match-very-good {
+    background-color: #d9ead3;
+    color: #2f6b2f;
+}
+
 /* Project requirements in project cards */
 
 .required-skill {

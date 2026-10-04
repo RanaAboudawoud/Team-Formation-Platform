@@ -6,7 +6,7 @@
 
     <h1>Recommended Projects</h1>
 
-    {% for project, score in ranked_projects %}
+    {% for project, score, match_level in ranked_projects %}
 
     <div class = "project-card">
 
@@ -20,7 +20,19 @@
             <p> <span class = "project-label">Stage: </span>{{project.get_stage_display}}</p>
             <p> <span class = "project-label">Compensation: </span>{{project.get_compensation_display}}</p>
             <p> <span class = "project-label">Expected commitment: </span>{{project.get_req_hours_display}}</p>
-            <p> <span class = "project-label">Match score: </span>{% widthratio score 1 100 %}%</p>
+
+            <p> 
+                <span class = "project-label">Match level: </span>
+                
+                <span class = "match-level 
+                    {% if match_level == 'Very bad' %}match-very-bad 
+                    {% elif match_level == 'Bad' %}match-bad 
+                    {% elif match_level == 'Good' %}match-good 
+                    {% elif match_level == 'Very good' %}match-very-good
+                    {% endif %}">
+                    {{ match_level }}
+                </span>
+            </p>
 
         </div>
 
