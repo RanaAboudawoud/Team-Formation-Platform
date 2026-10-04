@@ -2,23 +2,56 @@
 
 {% block content %}
 
-<h1>Project Requirements</h1>
+<div class = "project-requirements-container">
 
-<h2>{{ project.name }}</h2>
+    <h1>Project Requirements</h1>
 
-<form method = "POST">
-    {% csrf_token %}
-    {{ role_form.as_p }}
+    <h2>{{ project.name }}</h2>
 
-    {{ skill_formset.management_form }}
+    <div class = "current-requirements">
 
-    {% for skill_form in skill_formset %}
-        {{ skill_form.as_p }}
-    {% endfor %}
+        <h3>Current requirements</h3>
 
-    <button type = "submit">Save requirements</button>
-</form>
+        {% for role in project.project_role_set.all %}
 
-<a href = "{% url 'idea_maker_profile' %}">Done</a>
+            <div class = "project-role">
+
+                <h4>{{ role.get_role_display }}</h4>
+
+                {% for required_skill in role.project_skill_set.all %}
+
+                    <span class = "required-skill">
+                        {{ required_skill.skill }} - {{ required_skill.get_required_proficiency_display }}
+                    </span>
+
+                {% endfor %}
+
+            </div>
+
+        {% empty %}
+
+            <p>No requirements added yet.</p>
+
+        {% endfor %}
+
+    </div>
+
+    <form class = "requirements-form" method = "POST">
+        {% csrf_token %}
+
+        {{ role_form.as_p }}
+
+        {{ skill_formset.management_form }}
+
+        {% for skill_form in skill_formset %}
+            {{ skill_form.as_p }}
+        {% endfor %}
+
+        <button type = "submit">Save requirements</button>
+    </form>
+
+    <a class = "done-link" href = "{% url 'idea_maker_profile' %}">Done</a>
+
+</div>
 
 {% endblock %}

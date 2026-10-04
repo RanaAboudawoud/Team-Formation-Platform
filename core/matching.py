@@ -12,7 +12,7 @@ def proficiency_matching(collaborator_proficiency, required_proficiency):
     return proficiency_levels[collaborator_proficiency] >= proficiency_levels[required_proficiency]
 
 def calculate_skill_match(collaborator, project):
-    project_skills = Project_skill.objects.filter(project = project)
+    project_skills = Project_skill.objects.filter(project_role__project = project)
     collaborator_skills = Collaborator_skill.objects.filter(collaborator = collaborator)
 
     matched_req = 0

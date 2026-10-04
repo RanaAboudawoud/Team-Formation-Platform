@@ -72,7 +72,7 @@ body {
     margin-bottom: 25px;
 }
 
-/* Project cards */
+/* Project cards in recommended projects*/
 
 .project-card {
     background-color: white;
@@ -98,7 +98,7 @@ body {
     font-weight: bold;
 }
 
-/* Project metadata */
+/* Project metadata in project cards */
 
 .project-meta {
     display: flex;
@@ -111,19 +111,39 @@ body {
     font-size: 14px;
 }
 
+/* Project requirements in project cards */
+
 .required-skill {
     display: inline-block;
-    margin: 5px 5px 0 0;
+    margin: 0 5px 5px 0;
     padding: 6px 10px;
-    background-color: #eef4f9;
+    background-color: #d7e2eb;
     border: 1px solid #d9e0e8;
     border-radius: 6px;
     font-size: 14px;
 }
 
+.project-role {
+    margin-bottom: 18px;
+}
+
+.project-role h4 {
+    color: #16305c;
+    margin: 0 0 8px 0;
+    font-size: 16px;
+}
+
 .project-card .project-description {
     color: #53627a;
     margin-bottom: 16px;
+}
+
+.requirements-heading {
+    color: #14213D;
+    margin-top: 22px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid #d9e0e8;
+    padding-bottom: 8px;
 }
 
 /* Collaborator profile page */
@@ -311,7 +331,7 @@ body {
     cursor: pointer;
 }
 
-/* Projects page */
+/* /Projects/ page */
 
 .projects-container {
     width: 80%;
@@ -400,3 +420,74 @@ body {
 .main-nav a:last-child {
     margin-left: auto;
 }
+
+/* Project requirements page */
+
+.project-requirements-container {
+    width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: white;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+}
+
+.project-requirements-container h1 {
+    color: #14213D;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.project-requirements-container h2 {
+    color: #0d2281;
+    margin-bottom: 30px;
+}
+
+.current-requirements {
+    margin-bottom: 30px;
+}
+
+.current-requirements h3 {
+    color: #14213D;
+    border-bottom: 1px solid #d9e0e8;
+    padding-bottom: 8px;
+}
+
+.requirements-form {
+    border-top: 1px solid #d9e0e8;
+    padding-bottom: 25px;
+}
+
+.requirements-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.requirements-form select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    background-color: #f6fafd;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.requirements-form button {
+    padding: 10px 20px;
+    background-color: #14213D;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.done-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: #16305c;
+    text-decoration: none;
+    font-weight: bold;
+}
+
