@@ -4,7 +4,7 @@
 
 <div class = "collaborator-container">
 
-    <h1>Recommended projects</h1>
+    <h1>Recommended Projects</h1>
 
     {% for project, score in ranked_projects %}
 
@@ -24,11 +24,20 @@
 
         </div>
 
-        
-        {% for required_skill in project.project_skill_set.all %}
-            <p class = "required-skill">
-                {{ required_skill.skill.name }} - {{ required_skill.get_required_proficiency_display }}
-            </p>
+        <h3 class = "requirements-heading">Roles Needed</h3>
+
+        {% for role in project.project_role_set.all %}
+
+            <div class = "project-role">
+
+                <h4>{{ role.get_role_display }}</h4>
+
+                {% for required_skill in role.project_skill_set.all %}
+                    <span class = "required-skill">{{ required_skill.skill }} - {{ required_skill.get_required_proficiency_display }}</span>
+                {% endfor %}
+
+            </div>
+
         {% endfor %}
 
     </div>

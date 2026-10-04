@@ -25,8 +25,40 @@
 
         <div class = "idea-maker-project-card">
 
-            <h3>{{ project.name }}</h3>
-            <p>{{ project.description }}</p>
+            <h2>{{ project.name }}</h2>
+
+            <p class = "project-description">
+                <span class = "project-label">Description: </span>{{ project.description }}
+            </p>
+
+            <div class = "project-meta">
+
+                <p> <span class = "project-label">Category: </span>{{project.get_category_display}}</p>
+                <p> <span class = "project-label">Stage: </span>{{project.get_stage_display}}</p>
+                <p> <span class = "project-label">Compensation: </span>{{project.get_compensation_display}}</p>
+                <p> <span class = "project-label">Expected commitment: </span>{{project.get_req_hours_display}}</p>
+
+            </div>
+
+            <h4 class = "requirements-heading">Roles Needed</h4>
+
+            {% for role in project.project_role_set.all %}
+
+                <div class = "project-role">
+
+                    <h4>{{ role.get_role_display }}</h4>
+                    
+                    {% for required_skill in role.project_skill_set.all %}
+                        <span class = "required-skill">{{ required_skill.skill }} - {{ required_skill.get_required_proficiency_display }}</span>
+                    {% endfor %}
+
+                </div>
+
+            {% empty %}
+
+                <p>No requirements added yet.</p>
+            
+                {% endfor %}
 
             <a class = "delete-project-link" href = "{% url 'delete_project' project.id %}">Delete Project</a>
 
