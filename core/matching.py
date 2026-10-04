@@ -68,7 +68,8 @@ def rank_projects(collaborator):
 
     for project in projects:
         score = calculate_project_score(collaborator, project)
-        ranked_projects.append((project, score))
+        match_level = get_match_level(score)
+        ranked_projects.append((project, score, match_level))
 
     ranked_projects.sort(key = itemgetter(1), reverse = True)
 
