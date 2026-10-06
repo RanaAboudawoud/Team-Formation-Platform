@@ -54,8 +54,14 @@
 
         <div class = "project-actions">
 
-            <button class = "interest-button" type = "button">Show Interest</button>
+            <form method = "post" action = "{% url 'show_interest' project.id %}">
+                {% csrf_token %}
 
+                <button class = "interest-button" type = "submit">Show Interest</button>
+
+            </form>
+
+            
         </div>
 
     </div>
