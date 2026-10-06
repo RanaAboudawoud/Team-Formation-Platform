@@ -218,6 +218,6 @@ def show_interest(request, project_id):
 
     project = Project.objects.get(id = project_id)
 
-    Project_interest.objects.create(collaborator = collaborator, project = project)
+    Project_interest.objects.get_or_create(collaborator = collaborator, project = project)
 
     return redirect("collaborator")
