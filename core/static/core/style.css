@@ -191,6 +191,17 @@ body {
     border-radius: 6px;
 }
 
+.interested_status {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #eef4f9;
+    color: #0d2281;
+    border: 1px solid #0d2281;
+    border-radius: 6px;
+    font-weight: bold;
+    font-style: italic;
+}
+
 /* Collaborator profile page */
 
 .profile-container {

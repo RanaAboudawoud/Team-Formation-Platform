@@ -54,13 +54,20 @@
 
         <div class = "project-actions">
 
-            <form method = "post" action = "{% url 'show_interest' project.id %}">
-                {% csrf_token %}
+            {% if project.id in interested_project_ids %}
 
-                <button class = "interest-button" type = "submit">Show Interest</button>
+                <span class = "interested_status">Interested</span>
 
-            </form>
+            {% else %}
 
+                <form method = "post" action = "{% url 'show_interest' project.id %}">
+                    {% csrf_token %}
+                    
+                    <button class = "interest-button" type = "submit">Show Interest</button>
+
+                </form>
+            
+            {% endif %}
             
         </div>
 

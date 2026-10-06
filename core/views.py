@@ -75,8 +75,11 @@ def collaborator_view(request):
         return redirect("collaborator_profile")
     
     ranked_projects = rank_projects(collaborator)
+
+    interests = Project_interest.objects.filter(collaborator = collaborator)
+    interested_project_ids = interests.values_list("project_id", flat = True)
     
-    return render(request, "core/collaborator.html", {"ranked_projects": ranked_projects})
+    return render(request, "core/collaborator.html", {"ranked_projects": ranked_projects, "interested_project_ids": interested_project_ids})
 
 def collaborator_profile(request):
     if not request.user.is_authenticated:
