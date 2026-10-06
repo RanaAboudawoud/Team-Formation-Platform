@@ -173,6 +173,24 @@ body {
     padding-bottom: 8px;
 }
 
+/* Interest button in project cards */
+
+.project-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.interest-button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #14213D;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
 /* Collaborator profile page */
 
 .profile-container {
