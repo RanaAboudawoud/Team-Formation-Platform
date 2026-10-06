@@ -151,3 +151,7 @@ class Collaborator_skill(models.Model):
     skill = models.ForeignKey(Skill, on_delete = models.CASCADE)
 
     proficiency = models.CharField(max_length = 200, choices = Project_skill.PROFICIENCY_CHOICES)
+
+class Project_interest(models.Model):
+    collaborator = models.ForeignKey(Collaborator_profile, on_delete = models.CASCADE)
+    project = models.ForeignKey(Project, on_delete = models.CASCADE)
