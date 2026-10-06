@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
-from .models import Project, Profile, Collaborator_profile, Collaborator_skill, Idea_maker_profile, Project_role, Project_skill
+from .models import Project, Profile, Collaborator_profile, Collaborator_skill, Idea_maker_profile, Project_role, Project_skill, Project_interest
 from . import forms
 from .matching import rank_projects
 
@@ -204,3 +204,17 @@ def delete_project(request, project_id):
     project.delete()
 
     return redirect('idea_maker_profile')
+
+def show_interest(request, project_id):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    user = request.user
+    profile = Profile.objects.get(user = user)
+    collaborator = Collaborator_profile.objects.get(profile = profile)
+
+    project = Project.objects.get(id = project_id)
+
+    Project_interest.objects.create(collaborator = collaborator, project = project)
+
+    return redirect("collaborator")
