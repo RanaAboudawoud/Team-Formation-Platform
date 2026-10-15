@@ -27,7 +27,15 @@ class Collaborator_profile(models.Model):
         (25, "20+ hours/week")
     ]
 
+    COMMITMENT_CHOICES = [
+        ("hobby", "Hobby"),
+        ("side_project", "Side Project"),
+        ("half_time", "Half Time"),
+        ("full_time", "Full Time")
+    ]
+
     availability = models.IntegerField(choices = AVAILABILITY_CHOICES)
+    commitment = models.CharField(max_length = 20, choices = COMMITMENT_CHOICES)
 
 class Idea_maker_profile(models.Model):
     profile = models.OneToOneField(Profile, on_delete = models.CASCADE)
