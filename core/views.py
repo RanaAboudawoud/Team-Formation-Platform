@@ -92,12 +92,13 @@ def collaborator_profile(request):
         if form.is_valid() and skill_formset.is_valid():
             availability = form.cleaned_data["availability"]
             commitment = form.cleaned_data["commitment"]
+            sector_interests = form.cleaned_data["sector_interests"]
 
             user = request.user
 
             #Spara information från användare i respektive databas
             profile = Profile.objects.get(user = user)
-            collaborator, created = Collaborator_profile.objects.update_or_create(profile = profile, defaults = {"availability": availability, "commitment": commitment})
+            collaborator, created = Collaborator_profile.objects.update_or_create(profile = profile, defaults = {"availability": availability, "commitment": commitment, "sector_interests": sector_interests})
 
             for skill_form in skill_formset:
                 if skill_form.cleaned_data:

@@ -36,6 +36,7 @@ class Collaborator_profile(models.Model):
 
     availability = models.IntegerField(choices = AVAILABILITY_CHOICES)
     commitment = models.CharField(max_length = 20, choices = COMMITMENT_CHOICES)
+    sector_interests = models.JSONField(default = list)
 
 class Idea_maker_profile(models.Model):
     profile = models.OneToOneField(Profile, on_delete = models.CASCADE)
