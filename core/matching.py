@@ -2,9 +2,9 @@ from .models import Collaborator_skill, Project_skill, Project
 from operator import itemgetter
 
 proficiency_levels = {
-    "beginner": 1, 
-    "intermediate": 2, 
-    "advanced": 3, 
+    "learning": 1, 
+    "familiar": 2, 
+    "competent": 3, 
     "expert": 4
     }
 
