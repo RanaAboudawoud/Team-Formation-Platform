@@ -205,7 +205,7 @@ body {
 /* Collaborator profile page */
 
 .profile-container {
-    width: 400px;
+    width: 600px;
     margin: 50px auto;
     padding: 30px;
     background-color: white;
@@ -229,8 +229,8 @@ body {
     min-width: 110px;
 }
 
-.profile-container select, .profile-container input {
-    width: 200px;
+.profile-container select, .profile-container input:not([type = "checkbox"]) {
+    width: 300px;
     padding: 10px;
     margin-top: 5px;
     background-color: #f6fafd;
@@ -253,6 +253,11 @@ body {
     color: #53627a;
     margin-bottom: 30px;
     font-size: 16px;
+}
+
+.profile-container form {
+    width: 500px;
+    margin: 0 auto;
 }
 
 /* Idea maker page */

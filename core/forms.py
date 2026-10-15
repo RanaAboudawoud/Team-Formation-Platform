@@ -29,6 +29,8 @@ class LoginForm(forms.Form):
 class CollaboratorForm(forms.Form):
     availability = forms.ChoiceField(choices = Collaborator_profile.AVAILABILITY_CHOICES)
     commitment = forms.ChoiceField(choices = Collaborator_profile.COMMITMENT_CHOICES)
+    sector_interests = forms.MultipleChoiceField(choices = Project.CATEGORY_CHOICES, widget = forms.CheckboxSelectMultiple)
+
 class CollaboratorSkillForm(forms.Form):
     skill = forms.ModelChoiceField(queryset = Skill.objects.all())
     proficiency = forms.ChoiceField(choices = Project_skill.PROFICIENCY_CHOICES)
