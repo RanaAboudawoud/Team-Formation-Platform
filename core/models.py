@@ -18,7 +18,16 @@ class Profile(models.Model):
 
 class Collaborator_profile(models.Model):
     profile = models.OneToOneField(Profile, on_delete = models.CASCADE)
-    availability = models.IntegerField()
+
+    AVAILABILITY_CHOICES = [
+        (5, "1-5 hours/week"),
+        (10, "5-10 hours/week"),
+        (15, "10-15 hours/week"),
+        (20, "15-20 hours/week"),
+        (25, "20+ hours/week")
+    ]
+
+    availability = models.IntegerField(choices = AVAILABILITY_CHOICES)
 
 class Idea_maker_profile(models.Model):
     profile = models.OneToOneField(Profile, on_delete = models.CASCADE)
