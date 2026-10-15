@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Profile, Skill, Collaborator_skill, Project_skill, Project, Project_role
+from .models import Profile, Skill, Collaborator_skill, Project_skill, Project, Project_role, Collaborator_profile
 
 class RegistrationForm(forms.Form):
     first_name = forms.CharField(max_length=200)
@@ -27,7 +27,7 @@ class LoginForm(forms.Form):
     password = forms.CharField(widget = forms.PasswordInput)
 
 class CollaboratorForm(forms.Form):
-    availability = forms.IntegerField(min_value = 0)
+    availability = forms.ChoiceField(choices = Collaborator_profile.AVAILABILITY_CHOICES)
 
 class CollaboratorSkillForm(forms.Form):
     skill = forms.ModelChoiceField(queryset = Skill.objects.all())
