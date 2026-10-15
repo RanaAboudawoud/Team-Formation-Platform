@@ -138,9 +138,9 @@ class Project_skill(models.Model):
     skill = models.ForeignKey(Skill, on_delete = models.CASCADE)
 
     PROFICIENCY_CHOICES = [
-        ("beginner", "Beginner"),
-        ("intermediate", "Intermediate"),
-        ("advanced", "Advanced"),
+        ("learning", "Learning"),
+        ("familiar", "Familiar"),
+        ("competent", "Competent"),
         ("expert", "Expert"),
     ]
 
