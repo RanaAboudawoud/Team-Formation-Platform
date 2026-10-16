@@ -72,6 +72,47 @@ body {
     margin-bottom: 25px;
 }
 
+/* Collaborator profile info */
+
+.collaborator-profile-card {
+    background-color: white;
+    border: 1px solid #d9e0e8;
+    border-left: 4px solid #0d2281;
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.collaborator-profile-card .profile-tag {
+    margin-top: 4px;
+    margin-bottom: 6px;
+}
+
+.collaborator-profile-card p {
+    margin: 10px 0;
+    color: #14213D;
+}
+
+.skill-tag {
+    display: inline-block;
+    margin: 0 5px 5px 0;
+    padding: 6px 10px;
+    background-color: #d7e2eb;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.edit-profile-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #14213D;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
 /* Project cards in recommended projects*/
 
 .project-card {
