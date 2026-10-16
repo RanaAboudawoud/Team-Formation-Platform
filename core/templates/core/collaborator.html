@@ -23,7 +23,7 @@
 
             {% for sector in sector_interests_display %}
 
-                <span class = "profile-tag">{{ sector }}</span>
+                {{ sector }}{% if not forloop.last %}, {% endif %}
 
             {% endfor %}
         </p>
