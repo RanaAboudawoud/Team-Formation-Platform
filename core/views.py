@@ -108,6 +108,8 @@ def collaborator_profile(request):
             profile = Profile.objects.get(user = user)
             collaborator, created = Collaborator_profile.objects.update_or_create(profile = profile, defaults = {"availability": availability, "commitment": commitment, "sector_interests": sector_interests})
 
+            Collaborator_skill.objects.filter(collaborator = collaborator).delete()
+
             for skill_form in skill_formset:
                 if skill_form.cleaned_data:
                     skill = skill_form.cleaned_data["skill"]
