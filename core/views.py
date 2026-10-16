@@ -73,13 +73,21 @@ def collaborator_view(request):
         collaborator = Collaborator_profile.objects.get(profile__user = request.user)
     except Collaborator_profile.DoesNotExist:
         return redirect("collaborator_profile")
+
+    collaborator_skills = Collaborator_skill.objects.filter(collaborator = collaborator)
+
+    sector_choices = dict(Project.CATEGORY_CHOICES)
+
+    sector_interests_display = [
+        sector_choices[sector] for sector in collaborator.sector_interests
+    ]
     
     ranked_projects = rank_projects(collaborator)
 
     interests = Project_interest.objects.filter(collaborator = collaborator)
     interested_project_ids = interests.values_list("project_id", flat = True)
     
-    return render(request, "core/collaborator.html", {"ranked_projects": ranked_projects, "interested_project_ids": interested_project_ids})
+    return render(request, "core/collaborator.html", {"ranked_projects": ranked_projects, "interested_project_ids": interested_project_ids, "collaborator": collaborator, "collaborator_skills": collaborator_skills, "sector_interests_display": sector_interests_display})
 
 def collaborator_profile(request):
     if not request.user.is_authenticated:
@@ -109,8 +117,25 @@ def collaborator_profile(request):
 
             return redirect("collaborator")
     else:
-        form = forms.CollaboratorForm()
-        skill_formset = forms.CollaboratorSkillFormSet()
+        profile = Profile.objects.get(user = request.user)
+
+        try:
+            collaborator = Collaborator_profile.objects.get(profile = profile)
+
+            form = forms.CollaboratorForm(initial = {"availability": collaborator.availability, "commitment": collaborator.commitment, "sector_interests": collaborator.sector_interests})
+
+            collaborator_skills = Collaborator_skill.objects.filter(collaborator = collaborator)
+
+            skills_initial = []
+
+            for collaborator_skill in collaborator_skills:
+                skills_initial.append({"skill": collaborator_skill.skill, "proficiency": collaborator_skill.proficiency})
+
+            skill_formset = forms.CollaboratorSkillFormSet(initial = skills_initial)
+
+        except Collaborator_profile.DoesNotExist:
+            form = forms.CollaboratorForm()
+            skill_formset = forms.CollaboratorSkillFormSet()
 
     return render(request, "core/collaborator_profile.html", {"collaborator_form": form, "skill_formset": skill_formset})
 

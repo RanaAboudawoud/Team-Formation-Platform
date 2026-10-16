@@ -3,6 +3,48 @@
 {% block content %}
 
 <div class = "collaborator-container">
+    
+    <h1>Your Profile</h1>
+
+    <div class = "collaborator-profile-card">
+
+        <p>
+            <span class = "project-label">Availability: </span>
+            {{ collaborator.get_availability_display }}
+        </p>
+
+        <p>
+            <span class = "project-label">Commitment: </span>
+            {{ collaborator.get_commitment_display }}
+        </p>
+
+        <p>
+            <span class = "project-label">Sector Interests: </span>
+
+            {% for sector in sector_interests_display %}
+
+                <span class = "profile-tag">{{ sector }}</span>
+
+            {% endfor %}
+        </p>
+
+        <p>
+            <span class = "project-label">Skills: </span>
+        </p>
+
+        {% for collaborator_skill in collaborator_skills %}
+
+            <span class = "skill-tag">{{ collaborator_skill.skill }} - {{ collaborator_skill.get_proficiency_display }}</span>
+        
+        {% endfor %}
+
+        <div>
+
+            <a class = "edit-profile-link" href = "{% url 'collaborator_profile' %}">Edit Profile</a>
+
+        </div>
+
+    </div>
 
     <h1>Recommended Projects</h1>
 
