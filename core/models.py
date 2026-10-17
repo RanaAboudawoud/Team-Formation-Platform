@@ -46,7 +46,7 @@ class Project(models.Model):
     name = models.CharField(max_length = 200)
     description = models.TextField(max_length = 1000)
 
-    CATEGORY_CHOICES = [
+    SECTOR_CHOICES = [
         ("technology", "Technology"),
         ("marketing", "Marketing"),
         ("writing", "Writing & Content"),
@@ -83,7 +83,7 @@ class Project(models.Model):
     ]
 
     req_hours = models.IntegerField(choices = REQ_HOURS_CHOICES)
-    category = models.CharField(max_length = 100, choices = CATEGORY_CHOICES)
+    sector = models.CharField(max_length = 100, choices = SECTOR_CHOICES)
     stage = models.CharField(max_length = 100, choices = STAGE_CHOICES)
     compensation = models.CharField(max_length = 100, choices = COMPENSATION_CHOICES)
 

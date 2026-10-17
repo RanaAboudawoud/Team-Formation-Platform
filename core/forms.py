@@ -29,7 +29,7 @@ class LoginForm(forms.Form):
 class CollaboratorForm(forms.Form):
     availability = forms.ChoiceField(choices = Collaborator_profile.AVAILABILITY_CHOICES)
     commitment = forms.ChoiceField(choices = Collaborator_profile.COMMITMENT_CHOICES)
-    sector_interests = forms.MultipleChoiceField(choices = Project.CATEGORY_CHOICES, widget = forms.CheckboxSelectMultiple)
+    sector_interests = forms.MultipleChoiceField(choices = Project.SECTOR_CHOICES, widget = forms.CheckboxSelectMultiple)
 
 class CollaboratorSkillForm(forms.Form):
     skill = forms.ModelChoiceField(queryset = Skill.objects.all())
@@ -44,7 +44,7 @@ class ProjectForm(forms.Form):
     name = forms.CharField(max_length = 200)
     description = forms.CharField(max_length = 1000, widget = forms.Textarea)
     req_hours = forms.ChoiceField(choices = Project.REQ_HOURS_CHOICES, label = "Expected commitment:")
-    category = forms.ChoiceField(choices = Project.CATEGORY_CHOICES)
+    sector = forms.ChoiceField(choices = Project.SECTOR_CHOICES)
     compensation = forms.ChoiceField(choices = Project.COMPENSATION_CHOICES)
     stage = forms.ChoiceField(choices = Project.STAGE_CHOICES)
 
