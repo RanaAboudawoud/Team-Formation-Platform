@@ -84,10 +84,7 @@ def collaborator_view(request):
     
     ranked_projects = rank_projects(collaborator)
 
-    interests = Project_interest.objects.filter(collaborator = collaborator)
-    interested_project_ids = interests.values_list("project_id", flat = True)
-    
-    return render(request, "core/collaborator.html", {"ranked_projects": ranked_projects, "interested_project_ids": interested_project_ids, "collaborator": collaborator, "collaborator_skills": collaborator_skills, "sector_interests_display": sector_interests_display})
+    return render(request, "core/collaborator.html", {"ranked_projects": ranked_projects, "collaborator": collaborator, "collaborator_skills": collaborator_skills, "sector_interests_display": sector_interests_display})
 
 def collaborator_profile(request):
     if not request.user.is_authenticated:
@@ -228,7 +225,11 @@ def project_requirements(request, project_id):
 def project_detail(request, project_id):
     project = Project.objects.get(id = project_id)
 
-    return render(request, "core/project_detail.html", {"project": project})
+    collaborator = Collaborator_profile.objects.get(profile__user = request.user)
+
+    interested = Project_interest.objects.filter(collaborator = collaborator, project = project).exists()
+
+    return render(request, "core/project_detail.html", {"project": project, "interested": interested})
 
 def delete_project(request, project_id):
     if not request.user.is_authenticated:
@@ -256,4 +257,4 @@ def show_interest(request, project_id):
 
     Project_interest.objects.get_or_create(collaborator = collaborator, project = project)
 
-    return redirect("collaborator")
+    return redirect("project_detail", project_id = project.id)

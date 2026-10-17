@@ -56,6 +56,20 @@
         
         <p class = "project-description"> <span class = "project-label">Description: </span>{{project.description}}</p>
 
+        <p>
+            <span class = "project-label">Match level: </span>
+
+            <span class = "match-level 
+                {% if match_level == 'Very bad' %}match-very-bad
+                {% elif match_level == 'Bad' %}match-bad
+                {% elif match_level == 'Good' %}match-good
+                {% elif match_level == 'Very good' %}match-very-good
+                {% endif %}">
+
+                {{ match_level }}
+            </span>
+        </p>
+
         <h3 class = "requirements-heading">Roles Needed</h3>
 
         {% for role in project.project_role_set.all %}
@@ -74,21 +88,10 @@
 
         <div class = "project-actions">
 
-            {% if project.id in interested_project_ids %}
+            <a class = "show-details-link" href = "{% url 'project_detail' project.id %}">
+                Show Details
+            </a>
 
-                <span class = "interested_status">Interested</span>
-
-            {% else %}
-
-                <form method = "post" action = "{% url 'show_interest' project.id %}">
-                    {% csrf_token %}
-                    
-                    <button class = "interest-button" type = "submit">Show Interest</button>
-
-                </form>
-            
-            {% endif %}
-            
         </div>
 
     </div>
