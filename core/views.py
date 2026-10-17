@@ -224,7 +224,12 @@ def project_requirements(request, project_id):
     has_role = project.project_role_set.exists()
 
     return render(request, "core/project_requirements.html", {"project": project, "role_form": role_form, "skill_formset": skill_formset, "has_role": has_role})
-    
+
+def project_detail(request, project_id):
+    project = Project.objects.get(id = project_detail)
+
+    return render(request, "core/project_detail.html", {"project": project})
+
 def delete_project(request, project_id):
     if not request.user.is_authenticated:
         return redirect("login")
