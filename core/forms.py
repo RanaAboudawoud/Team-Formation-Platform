@@ -56,4 +56,4 @@ class ProjectSkillForm(forms.Form):
     required_proficiency = forms.ChoiceField(choices = Project_skill.PROFICIENCY_CHOICES)
 
 
-ProjectSkillFormSet = forms.formset_factory(ProjectSkillForm, extra = 0, min_num = 1, validate_min = True)
+ProjectSkillFormSet = forms.formset_factory(ProjectSkillForm, extra = 1)
