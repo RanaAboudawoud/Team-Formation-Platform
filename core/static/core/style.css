@@ -139,6 +139,19 @@ body {
     font-weight: bold;
 }
 
+.project-detail-card {
+    position: relative;
+}
+
+.project-detail-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #14213D;
+    text-decoration: none;
+    font-size: 28px;
+}
+
 /* Project metadata in project cards */
 
 .project-meta {
@@ -149,6 +162,7 @@ body {
 
 .project-meta p {
     margin: 0;
+    font-size: 14px;
 }
 
 .match-level {

@@ -55,28 +55,6 @@
         <h2>{{project.name}}</h2>
         
         <p class = "project-description"> <span class = "project-label">Description: </span>{{project.description}}</p>
-    
-        <div class = "project-meta">
-
-            <p> <span class = "project-label">Sector: </span>{{project.get_sector_display}}</p>
-            <p> <span class = "project-label">Stage: </span>{{project.get_stage_display}}</p>
-            <p> <span class = "project-label">Compensation: </span>{{project.get_compensation_display}}</p>
-            <p> <span class = "project-label">Expected commitment: </span>{{project.get_req_hours_display}}</p>
-
-            <p> 
-                <span class = "project-label">Match level: </span>
-                
-                <span class = "match-level 
-                    {% if match_level == 'Very bad' %}match-very-bad 
-                    {% elif match_level == 'Bad' %}match-bad 
-                    {% elif match_level == 'Good' %}match-good 
-                    {% elif match_level == 'Very good' %}match-very-good
-                    {% endif %}">
-                    {{ match_level }}
-                </span>
-            </p>
-
-        </div>
 
         <h3 class = "requirements-heading">Roles Needed</h3>
 

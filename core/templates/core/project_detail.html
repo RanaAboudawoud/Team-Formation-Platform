@@ -1,0 +1,68 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+<div class = "collaborator-container">
+
+    <div class = "project-card project-detail-card">
+
+        <a class = "project-detail-close" href = "{% url 'collaborator' %}">
+            &times;
+        </a>
+
+        <h2> {{ project.name }} </h2>
+
+        <p> 
+            <span class = "project-label">Description: </span>
+            {{ project.description }}
+        </p>
+
+        <div class = "project-meta">
+
+            <p>
+                <span class = "project-label">Sector:</span>
+                {{ project.get_sector_display }}
+            </p>
+
+            <p>
+                <span class = "project-label">Stage: </span>
+                {{ project.get_stage_display }}
+            </p>
+
+            <p>
+                <span class = "project-label">Compensation: </span>
+                {{ project.get_compensation_display }}
+            </p>
+
+            <p>
+                <span class = "project-label">Expected commitment: </span>
+                {{ project.get_req_hours_display }}
+            </p>
+
+        </div>
+
+        <h3 class = "requirements-heading"> Roles Needed</h3>
+
+        {% for role in project.project_role_set.all %}
+
+            <div class = "project-role">
+
+                <h4>{{ role.get_role_display }}</h4>
+
+                {% for required_skill in role.project_skill_set.all %}
+
+                    <span class = "required-skill">
+                        {{ required_skill.skill }} - {{ required_skill.get_required_proficiency_display }}
+                    </span>
+                
+                {% endfor %}
+
+            </div>
+        
+        {% endfor %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -226,7 +226,7 @@ def project_requirements(request, project_id):
     return render(request, "core/project_requirements.html", {"project": project, "role_form": role_form, "skill_formset": skill_formset, "has_role": has_role})
 
 def project_detail(request, project_id):
-    project = Project.objects.get(id = project_detail)
+    project = Project.objects.get(id = project_id)
 
     return render(request, "core/project_detail.html", {"project": project})
 
