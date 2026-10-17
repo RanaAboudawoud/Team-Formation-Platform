@@ -76,7 +76,7 @@ def collaborator_view(request):
 
     collaborator_skills = Collaborator_skill.objects.filter(collaborator = collaborator)
 
-    sector_choices = dict(Project.CATEGORY_CHOICES)
+    sector_choices = dict(Project.SECTOR_CHOICES)
 
     sector_interests_display = [
         sector_choices[sector] for sector in collaborator.sector_interests
@@ -178,11 +178,11 @@ def create_project(request):
             name = form.cleaned_data["name"]
             req_hours = form.cleaned_data["req_hours"]
             description = form.cleaned_data["description"]
-            category = form.cleaned_data["category"]
+            sector = form.cleaned_data["sector"]
             compensation = form.cleaned_data["compensation"]
             stage = form.cleaned_data["stage"]
 
-            project = Project.objects.create(name = name, req_hours = req_hours, description = description, category = category, compensation = compensation, stage = stage, idea_maker = idea_maker)
+            project = Project.objects.create(name = name, req_hours = req_hours, description = description, sector = sector, compensation = compensation, stage = stage, idea_maker = idea_maker)
 
             return redirect("project_requirements", project_id = project.id)
     else:
