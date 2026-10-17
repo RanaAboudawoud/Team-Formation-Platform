@@ -221,7 +221,9 @@ def project_requirements(request, project_id):
         role_form = forms.ProjectRoleForm()
         skill_formset = forms.ProjectSkillFormSet()
 
-    return render(request, "core/project_requirements.html", {"project": project, "role_form": role_form, "skill_formset": skill_formset})
+    has_role = project.project_role_set.exists()
+
+    return render(request, "core/project_requirements.html", {"project": project, "role_form": role_form, "skill_formset": skill_formset, "has_role": has_role})
     
 def delete_project(request, project_id):
     if not request.user.is_authenticated:
