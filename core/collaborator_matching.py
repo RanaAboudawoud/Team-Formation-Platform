@@ -13,3 +13,10 @@ def get_interested_collaborators(project):
 
 def calculate_collaborator_match_score(collaborator, project, skill_weight = 0.25, availability_weight = 0.25, sector_weight = 0.25, commitment_weight = 0.25):
     return calculate_project_score(collaborator, project, skill_weight = skill_weight, availability_weight = availability_weight, sector_weight = sector_weight, commitment_weight = commitment_weight)
+
+def filter_collaborators_by_availability(collaborators, project):
+    available_collaborators = []
+
+    for collaborator in collaborators:
+        if collaborator.availability >= project.req_hours:
+            available_collaborators.append(collaborator)
