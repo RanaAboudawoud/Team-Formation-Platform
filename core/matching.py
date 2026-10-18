@@ -65,11 +65,13 @@ def calculate_availability_match(collaborator, project):
     else:
         return collaborator_availability / project_req_availability
 
-def calculate_project_score(collaborator, project, skill_weight = 0.5, availability_weight = 0.5):
+def calculate_project_score(collaborator, project, skill_weight = 0.25, availability_weight = 0.25, sector_weight = 0.25, commitment_weight = 0.25):
     skill_match = calculate_skill_match(collaborator, project)
     availability_match = calculate_availability_match(collaborator, project)
+    sector_match = calculate_sector_match(collaborator, project)
+    commitment_match = calculate_commitment_match(collaborator, project)
 
-    score = (skill_match * skill_weight) + (availability_match * availability_weight)
+    score = (skill_match * skill_weight) + (availability_match * availability_weight) + (sector_match * sector_weight) + (commitment_match * commitment_weight)
 
     return score
 
