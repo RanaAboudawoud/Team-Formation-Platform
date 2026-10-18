@@ -81,6 +81,10 @@ def rank_projects(collaborator):
     ranked_projects = []
 
     for project in projects:
+
+        if collaborator.availability < project.req_hours:
+            continue
+
         score = calculate_project_score(collaborator, project)
         match_level = get_match_level(score)
         ranked_projects.append((project, score, match_level))
