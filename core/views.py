@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import Project, Profile, Collaborator_profile, Collaborator_skill, Idea_maker_profile, Project_role, Project_skill, Project_interest
 from . import forms
 from .matching import rank_projects
+from .collaborator_matching import rank_interested_collaborators
 
 def home(request):
     if not request.user.is_authenticated:
@@ -147,6 +148,13 @@ def idea_maker_profile(request):
     idea_maker, created = Idea_maker_profile.objects.get_or_create(profile = profile)
     projects = Project.objects.filter(idea_maker = idea_maker)
 
+    projects_with_collaborators = []
+
+    for project in projects:
+        ranked_collaborators = rank_interested_collaborators(project)
+
+        projects_with_collaborators.append((project, ranked_collaborators))
+
     if request.method == "POST":
         form = forms.IdeaMakerForm(request.POST)
         if form.is_valid():
@@ -159,7 +167,7 @@ def idea_maker_profile(request):
     else:
         form = forms.IdeaMakerForm(initial = {"bio": idea_maker.bio})
 
-    return render(request, "core/idea_maker_profile.html", {"idea_maker_form": form, "idea_maker": idea_maker, "projects": projects})
+    return render(request, "core/idea_maker_profile.html", {"idea_maker_form": form, "idea_maker": idea_maker, "projects": projects, "projects_with_collaborators": projects_with_collaborators})
 
 def create_project(request):
     if not request.user.is_authenticated:

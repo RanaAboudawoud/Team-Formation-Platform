@@ -413,6 +413,20 @@ body {
     font-weight: bold;
 }
 
+.interested-collaborator {
+    background-color: #f6fafd;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+    padding: 12px 15px;
+    margin-bottom: 10px;
+}
+
+.collaborator-name {
+    font-weight: bold;
+    color: #14213D;
+    margin: 0 0 8px 0;
+}
+
 /* create project page */
 
 .create-project-container {
