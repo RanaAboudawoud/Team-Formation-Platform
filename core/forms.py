@@ -47,6 +47,7 @@ class ProjectForm(forms.Form):
     sector = forms.ChoiceField(choices = Project.SECTOR_CHOICES)
     compensation = forms.ChoiceField(choices = Project.COMPENSATION_CHOICES)
     stage = forms.ChoiceField(choices = Project.STAGE_CHOICES)
+    commitment = forms.ChoiceField(choices = Collaborator_profile.COMMITMENT_CHOICES)
 
 class ProjectRoleForm(forms.Form):
     role = forms.ChoiceField(choices = Project_role.ROLE_CHOICES)
