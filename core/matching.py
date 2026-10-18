@@ -44,6 +44,12 @@ def calculate_skill_match(collaborator, project):
 
     return matched_req / total_req
 
+def calculate_sector_match(collaborator, project):
+    if project.sector in collaborator.sector_interests:
+        return 1.0
+    else:
+        return 0.0
+
 def calculate_availability_match(collaborator, project):
     project_req_availability = project.req_hours
     collaborator_availability = collaborator.availability
