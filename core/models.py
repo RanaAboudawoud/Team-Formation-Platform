@@ -87,6 +87,8 @@ class Project(models.Model):
     stage = models.CharField(max_length = 100, choices = STAGE_CHOICES)
     compensation = models.CharField(max_length = 100, choices = COMPENSATION_CHOICES)
 
+    commitment = models.CharField(max_length = 20, choices = Collaborator_profile.COMMITMENT_CHOICES)
+
     idea_maker = models.ForeignKey(Idea_maker_profile, on_delete = models.CASCADE)
 
 class Project_role(models.Model):

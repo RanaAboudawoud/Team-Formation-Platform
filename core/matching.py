@@ -50,6 +50,12 @@ def calculate_sector_match(collaborator, project):
     else:
         return 0.0
 
+def calculate_commitment_match(collaborator, project):
+    if collaborator.commitment == project.commitment:
+        return 1.0
+    else:
+        return 0.0
+
 def calculate_availability_match(collaborator, project):
     project_req_availability = project.req_hours
     collaborator_availability = collaborator.availability
