@@ -186,8 +186,9 @@ def create_project(request):
             sector = form.cleaned_data["sector"]
             compensation = form.cleaned_data["compensation"]
             stage = form.cleaned_data["stage"]
+            commitment = form.cleaned_data["commitment"]
 
-            project = Project.objects.create(name = name, req_hours = req_hours, description = description, sector = sector, compensation = compensation, stage = stage, idea_maker = idea_maker)
+            project = Project.objects.create(name = name, req_hours = req_hours, description = description, sector = sector, compensation = compensation, stage = stage, commitment = commitment, idea_maker = idea_maker)
 
             return redirect("project_requirements", project_id = project.id)
     else:
