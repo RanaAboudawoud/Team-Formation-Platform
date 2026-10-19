@@ -43,7 +43,7 @@ class IdeaMakerForm(forms.Form):
 class ProjectForm(forms.Form):
     name = forms.CharField(max_length = 200)
     description = forms.CharField(max_length = 1000, widget = forms.Textarea)
-    req_hours = forms.ChoiceField(choices = Project.REQ_HOURS_CHOICES, label = "Expected commitment:")
+    req_hours = forms.ChoiceField(choices = Project.REQ_HOURS_CHOICES, label = "Expected Availability:")
     sector = forms.ChoiceField(choices = Project.SECTOR_CHOICES)
     compensation = forms.ChoiceField(choices = Project.COMPENSATION_CHOICES)
     stage = forms.ChoiceField(choices = Project.STAGE_CHOICES)

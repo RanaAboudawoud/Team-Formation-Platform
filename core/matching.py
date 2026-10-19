@@ -61,6 +61,20 @@ def get_matching_skills(collaborator, project):
 
     return matching_skills
 
+def get_matching_factors(collaborator, project):
+    matching_factors = []
+
+    if calculate_availability_match(collaborator, project) == 1.0:
+        matching_factors.append("Availability")
+
+    if calculate_sector_match(collaborator, project) == 1.0:
+        matching_factors.append("Sector")
+
+    if calculate_commitment_match(collaborator, project) == 1.0:
+        matching_factors.append("Commitment")
+
+    return matching_factors
+
 def calculate_sector_match(collaborator, project):
     if project.sector in collaborator.sector_interests:
         return 1.0
