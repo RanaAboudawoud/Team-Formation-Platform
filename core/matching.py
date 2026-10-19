@@ -75,6 +75,20 @@ def get_matching_factors(collaborator, project):
 
     return matching_factors
 
+def get_recommended_reasons(collaborator, project):
+    reasons = []
+
+    matching_skills = get_matching_skills(collaborator, project)
+    matching_factors = get_matching_factors(collaborator, project)
+
+    for project_skill in matching_skills:
+        reasons.append(f"Matches required skill: {project_skill.skill}")
+
+    for factor in matching_factors:
+        reasons.append(f"Matches {factor.lower()}")
+
+    return reasons
+
 def calculate_sector_match(collaborator, project):
     if project.sector in collaborator.sector_interests:
         return 1.0
