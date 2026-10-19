@@ -44,6 +44,23 @@ def calculate_skill_match(collaborator, project):
 
     return matched_req / total_req
 
+def get_matching_skills(collaborator, project):
+    project_skills = Project_skill.objects.filter(project_role__project = project)
+    collaborator_skills = Collaborator_skill.objects.filter(collaborator = collaborator)
+
+    matching_skills = []
+
+    for project_skill in project_skills:
+        for collaborator_skill in collaborator_skills:
+            skill_matches = collaborator_skill.skill == project_skill.skill
+            proficiency_match = proficiency_matching(collaborator_skill.proficiency, project_skill.required_proficiency)
+
+        if skill_matches and proficiency_match:
+            matching_skills.append(project_skill)
+            break
+
+    return matching_skills
+
 def calculate_sector_match(collaborator, project):
     if project.sector in collaborator.sector_interests:
         return 1.0
