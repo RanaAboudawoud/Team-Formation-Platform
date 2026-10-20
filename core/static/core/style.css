@@ -246,9 +246,20 @@ body {
 .match-reason-tag {
     display: inline-block;
     background-color: #e3f2e1;
+    border: 1px solid #c5ddc1;
     border-radius: 6px;
     padding: 6px 10px;
     color: #2f6b2f;
+    font-style: italic;
+}
+
+.non-match-reason-tag {
+    display: inline-block;
+    background-color: #f8d7da;
+    border: 1px solid #e5b8bd;
+    border-radius: 6px;
+    padding: 6px 10px;
+    color: #8b1e1e;
     font-style: italic;
 }
 

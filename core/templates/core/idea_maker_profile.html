@@ -63,7 +63,7 @@
             
             <h4 class = "requirements-heading">Interested Collaborators</h4>
 
-            {% for collaborator, score, match_level, reasons in ranked_collaborators %}
+            {% for collaborator, score, match_level, reasons, non_matching_reasons in ranked_collaborators %}
 
                 <div class = "interested-collaborator">
 
@@ -84,6 +84,12 @@
 
                         {% for reason in reasons %}
                             <span class = "match-reason-tag">✓ {{ reason }}</span>
+                        
+                        {% endfor %}
+
+                        {% for reason in non_matching_reasons %}
+
+                            <span class = "non-match-reason-tag">✗ {{ reason }}</span>
                         
                         {% endfor %}
 
