@@ -61,6 +61,28 @@ def get_matching_skills(collaborator, project):
 
     return matching_skills
 
+def get_non_matching_skills(collaborator, project):
+    project_skills = Project_skill.objects.filter(project_role__project = project)
+    collaborator_skills = Collaborator_skill.objects.filter(collaborator = collaborator)
+
+    non_matching_skills = []
+
+    for project_skill in project_skills:
+        skill_matched = False 
+
+        for collaborator_skill in collaborator_skills:
+            skill_matches = collaborator_skill.skill == project_skill.skill
+            proficiency_match = proficiency_matching(collaborator_skill.proficiency, project_skill.required_proficiency)
+
+            if skill_matches and proficiency_match:
+                skill_matched = True
+                break
+
+        if not skill_matched:
+            non_matching_skills.append(project_skill)
+
+    return non_matching_skills
+
 def get_matching_factors(collaborator, project):
     matching_factors = []
 
@@ -75,6 +97,17 @@ def get_matching_factors(collaborator, project):
 
     return matching_factors
 
+def get_non_matching_factors(collaborator, project):
+    non_matching_factors = []
+
+    if calculate_sector_match(collaborator, project) == 0.0:
+        non_matching_factors.append("Sector")
+
+    if calculate_commitment_match(collaborator, project) == 0.0:
+        non_matching_factors.append("Commitment")
+
+    return non_matching_factors
+
 def get_recommended_reasons(collaborator, project):
     reasons = []
 
@@ -85,6 +118,19 @@ def get_recommended_reasons(collaborator, project):
         reasons.append(f"Skill: {project_skill.skill}")
 
     reasons.extend(matching_factors)
+
+    return reasons
+
+def get_non_matching_reasons(collaborator, project):
+    reasons = []
+
+    non_matching_skills = get_non_matching_skills(collaborator, project)
+    non_matching_factors = get_non_matching_factors(collaborator, project)
+
+    for project_skill in non_matching_skills:
+        reasons.append(f"Skill: {project_skill.skill}")
+
+    reasons.extend(non_matching_factors)
 
     return reasons
 
@@ -132,8 +178,9 @@ def rank_projects(collaborator):
         score = calculate_project_score(collaborator, project)
         match_level = get_match_level(score)
         reasons = get_recommended_reasons(collaborator, project)
+        non_matching_reasons = get_non_matching_reasons(collaborator, project)
 
-        ranked_projects.append((project, score, match_level, reasons))
+        ranked_projects.append((project, score, match_level, reasons, non_matching_reasons))
 
     ranked_projects.sort(key = itemgetter(1), reverse = True)
 
