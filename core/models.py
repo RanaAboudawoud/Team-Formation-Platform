@@ -175,3 +175,11 @@ class Collaborator_skill(models.Model):
 class Project_interest(models.Model):
     collaborator = models.ForeignKey(Collaborator_profile, on_delete = models.CASCADE)
     project = models.ForeignKey(Project, on_delete = models.CASCADE)
+
+    STATUS_CHOICES = [
+        ("pending", "Pending"),
+        ("accepted", "Accepted"),
+        ("declined", "Declined")
+    ]
+
+    status = models.CharField(max_length = 20, choices = STATUS_CHOICES, default = "pending")

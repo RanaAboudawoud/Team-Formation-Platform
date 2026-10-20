@@ -275,6 +275,11 @@ def accept_collaborator(request, project_id, collaborator_id):
     project = Project.objects.get(id = project_id)
     collaborator = Collaborator_profile.objects.get(id = collaborator_id)
 
+    project_interest = Project_interest.objects.get(project = project, collaborator = collaborator)
+
+    project_interest.status = "accepted"
+    project_interest.save()
+
     return redirect("idea_maker_profile")
 
 def decline_collaborator(request, project_id, collaborator_id):
@@ -283,5 +288,10 @@ def decline_collaborator(request, project_id, collaborator_id):
 
     project = Project.objects.get(id = project_id)
     collaborator = Collaborator_profile.objects.get(id = collaborator_id)
+
+    project_interest = Project_interest.objects.get(project = project, collaborator = collaborator)
+
+    project_interest.status = "declined"
+    project_interest.save()
 
     return redirect("idea_maker_profile")
