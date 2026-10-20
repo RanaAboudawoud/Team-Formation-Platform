@@ -95,6 +95,14 @@
 
                     </div>
 
+                    <div class = "collaborator-actions">
+
+                        <a class = "accept-collaborator-button" href = "{% url 'accept_collaborator' project.id collaborator.id %}">Accept</a>
+
+                        <a class = "decline-collaborator-button" href = "{% url 'decline_collaborator' project.id collaborator.id %}">Decline</a>
+
+                    </div>
+
                 </div>
 
             {% empty %}
