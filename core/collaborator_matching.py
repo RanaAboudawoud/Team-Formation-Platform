@@ -1,5 +1,5 @@
 from .models import Project_interest
-from .matching import calculate_project_score, get_match_level
+from .matching import calculate_project_score, get_match_level, get_recommended_reasons
 from operator import itemgetter
 
 def get_interested_collaborators(project):
@@ -34,8 +34,9 @@ def rank_interested_collaborators(project):
     for collaborator in available_collaborators:
         score = calculate_collaborator_match_score(collaborator, project)
         match_level = get_match_level(score)
+        reasons = get_recommended_reasons(collaborator, project)
 
-        ranked_collaborators.append((collaborator, score, match_level))
+        ranked_collaborators.append((collaborator, score, match_level, reasons))
 
     ranked_collaborators.sort(key = itemgetter(1), reverse = True)
 
