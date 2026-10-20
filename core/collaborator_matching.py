@@ -3,7 +3,7 @@ from .matching import calculate_project_score, get_match_level, get_recommended_
 from operator import itemgetter
 
 def get_interested_collaborators(project):
-    interests = Project_interest.objects.filter(project = project)
+    interests = Project_interest.objects.filter(project = project).exclude(status = "declined")
 
     collaborators = []
 
@@ -37,7 +37,10 @@ def rank_interested_collaborators(project):
         reasons = get_recommended_reasons(collaborator, project)
         non_matching_reasons = get_non_matching_reasons(collaborator, project)
 
-        ranked_collaborators.append((collaborator, score, match_level, reasons, non_matching_reasons))
+        interest = Project_interest.objects.get(project = project, collaborator = collaborator)
+        status = interest.status
+
+        ranked_collaborators.append((collaborator, score, match_level, reasons, non_matching_reasons, status))
 
     ranked_collaborators.sort(key = itemgetter(1), reverse = True)
 

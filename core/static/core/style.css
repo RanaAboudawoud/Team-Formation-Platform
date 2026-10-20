@@ -284,6 +284,17 @@ body {
     border: 1px solid #14213D;
 }
 
+.accepted-collaborator-status {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #eef4f9;
+    color: #0d2281;
+    border: 1px solid #0d2281;
+    border-radius: 6px;
+    font-weight: bold;
+    font-style: italic;
+}
+
 .decline-collaborator-button {
     background-color: #8b1e1e;
     color: white;
@@ -315,6 +326,28 @@ body {
     color: #0d2281;
     border: 1px solid #0d2281;
     border-radius: 6px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.accepted_status {
+    display: inline-block;
+    padding: 6px 10px;
+    border: 1px solid #c5ddc1;
+    border-radius: 6px;
+    background-color: #e3f2e1;
+    color: #2f6b2f;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.declined_status {
+    display: inline-block;
+    padding: 6px 10px;
+    border: 1px solid #e5b8bd;
+    border-radius: 6px;
+    background-color: #f8d7da;
+    color: #8b1e1e;
     font-weight: bold;
     font-style: italic;
 }

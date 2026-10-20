@@ -236,9 +236,14 @@ def project_detail(request, project_id):
 
     collaborator = Collaborator_profile.objects.get(profile__user = request.user)
 
-    interested = Project_interest.objects.filter(collaborator = collaborator, project = project).exists()
+    project_interest = Project_interest.objects.filter(collaborator = collaborator, project = project).first()
 
-    return render(request, "core/project_detail.html", {"project": project, "interested": interested})
+    interest_status = None
+
+    if project_interest:
+        interest_status = project_interest.status
+
+    return render(request, "core/project_detail.html", {"project": project, "interest_status": interest_status})
 
 def delete_project(request, project_id):
     if not request.user.is_authenticated:
