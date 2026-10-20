@@ -15,4 +15,6 @@ urlpatterns = [
     path("project_requirements/<int:project_id>/", views.project_requirements, name = "project_requirements"),
     path("show_interest/<int:project_id>/", views.show_interest, name = "show_interest"),
     path("projects/<int:project_id>/", views.project_detail, name = "project_detail"),
+    path("accept_collaborator/<int:project_id>/<int:collaborator_id>", views.accept_collaborator, name = "accept_collaborator"),
+    path("decline_collaborator/<int:project_id>/<int:collaborator_id>/", views.decline_collaborator, name = "decline_collaborator")
 ]

@@ -267,3 +267,21 @@ def show_interest(request, project_id):
     Project_interest.objects.get_or_create(collaborator = collaborator, project = project)
 
     return redirect("project_detail", project_id = project.id)
+
+def accept_collaborator(request, project_id, collaborator_id):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    project = Project.objects.get(id = project_id)
+    collaborator = Collaborator_profile.objects.get(id = collaborator_id)
+
+    return redirect("idea_maker_profile")
+
+def decline_collaborator(request, project_id, collaborator_id):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    project = Project.objects.get(id = project_id)
+    collaborator = Collaborator_profile.objects.get(id = collaborator_id)
+
+    return redirect("idea_maker_profile")
