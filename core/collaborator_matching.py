@@ -45,3 +45,6 @@ def rank_interested_collaborators(project):
     ranked_collaborators.sort(key = itemgetter(1), reverse = True)
 
     return ranked_collaborators
+
+def is_mutual_match(collaborator, project):
+    return Project_interest.objects.filter(collaborator = collaborator, project = project, status = "accepted").exists()
