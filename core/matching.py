@@ -55,9 +55,9 @@ def get_matching_skills(collaborator, project):
             skill_matches = collaborator_skill.skill == project_skill.skill
             proficiency_match = proficiency_matching(collaborator_skill.proficiency, project_skill.required_proficiency)
 
-        if skill_matches and proficiency_match:
-            matching_skills.append(project_skill)
-            break
+            if skill_matches and proficiency_match:
+                matching_skills.append(project_skill)
+                break
 
     return matching_skills
 
@@ -82,10 +82,9 @@ def get_recommended_reasons(collaborator, project):
     matching_factors = get_matching_factors(collaborator, project)
 
     for project_skill in matching_skills:
-        reasons.append(f"Matches required skill: {project_skill.skill}")
+        reasons.append(f"Skill: {project_skill.skill}")
 
-    for factor in matching_factors:
-        reasons.append(f"Matches {factor.lower()}")
+    reasons.extend(matching_factors)
 
     return reasons
 
@@ -132,7 +131,9 @@ def rank_projects(collaborator):
 
         score = calculate_project_score(collaborator, project)
         match_level = get_match_level(score)
-        ranked_projects.append((project, score, match_level))
+        reasons = get_recommended_reasons(collaborator, project)
+
+        ranked_projects.append((project, score, match_level, reasons))
 
     ranked_projects.sort(key = itemgetter(1), reverse = True)
 

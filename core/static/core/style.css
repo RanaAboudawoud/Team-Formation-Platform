@@ -236,6 +236,22 @@ body {
     padding-bottom: 8px;
 }
 
+.match-reasons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.match-reason-tag {
+    display: inline-block;
+    background-color: #e3f2e1;
+    border-radius: 6px;
+    padding: 6px 10px;
+    color: #2f6b2f;
+    font-style: italic;
+}
+
 /* Interest button in project cards */
 
 .project-actions {

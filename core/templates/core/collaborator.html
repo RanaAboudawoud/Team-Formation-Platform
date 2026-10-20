@@ -48,7 +48,7 @@
 
     <h1>Recommended Projects</h1>
 
-    {% for project, score, match_level in ranked_projects %}
+    {% for project, score, match_level, reasons in ranked_projects %}
 
     <div class = "project-card">
 
@@ -69,6 +69,18 @@
                 {{ match_level }}
             </span>
         </p>
+
+        <h3 class = "requirements-heading">Match reasons</h3>
+
+        <div class = "match-reasons">
+
+            {% for reason in reasons %}
+
+                <span class = "match-reason-tag">✓ {{ reason }}</span>
+            
+            {% endfor %}
+
+        </div>
 
         <h3 class = "requirements-heading">Roles Needed</h3>
 
