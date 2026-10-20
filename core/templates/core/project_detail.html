@@ -35,8 +35,13 @@
             </p>
 
             <p>
-                <span class = "project-label">Expected commitment: </span>
+                <span class = "project-label">Expected Availability: </span>
                 {{ project.get_req_hours_display }}
+            </p>
+
+            <p>
+                <span class = "project-label">Commitment: </span>
+                {{ project.get_commitment_display }}
             </p>
 
         </div>
@@ -63,10 +68,18 @@
 
         <div class = "project-actions">
 
-            {% if interested %}
+            {% if interest_status == "pending" %}
 
                 <span class = "interested_status">Interested</span>
 
+            {% elif interest_status == "accepted" %}
+
+                <span class = "accepted_status">Accepted!</span>
+            
+            {% elif interest_status == "declined" %}
+
+                <span class = "declined_status">Declined</span>
+            
             {% else %}
 
                 <form method = "post" action = "{% url 'show_interest' project.id %}">
