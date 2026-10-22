@@ -83,11 +83,6 @@ body {
     margin-bottom: 30px;
 }
 
-.collaborator-profile-card .profile-tag {
-    margin-top: 4px;
-    margin-bottom: 6px;
-}
-
 .collaborator-profile-card p {
     margin: 10px 0;
     color: #14213D;
@@ -598,33 +593,48 @@ body {
 
 .home-container {
     width: 80%;
-    margin: 50px auto;
-    text-align: center;
+    margin: 40px auto;
 }
 
 .home-container h1 {
     color: #14213D;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
 }
 
-.home-container p {
+.home-description {
     color: #53627a;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 
-.home-actions {
+.home-container h2 {
+    color: #14213D;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #d9e0e8;
+    padding-bottom: 8px;
+}
+
+.interaction-row {
     display: flex;
-    justify-content: center;
-    gap: 15px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
 }
 
-.home-actions a {
-    padding: 10px 20px;
-    background-color: #14213D;
-    color: white;
-    text-decoration: none;
-    border-radius: 6px;
+.interaction-row h3 {
+    color: #0d2281;
+    margin: 0 0 8px 0;
 }
+
+.interaction-row p {
+    color: #53627a;
+    margin: 0;
+}
+
 
 /* Navigation bar */
 
@@ -733,6 +743,7 @@ body {
 
 .contact-message-button {
     display: inline-block;
+    margin-top: 15px;
     padding: 10px 20px;
     background-color: #14213D;
     color: white;

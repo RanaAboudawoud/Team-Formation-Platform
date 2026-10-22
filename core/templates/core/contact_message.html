@@ -5,7 +5,7 @@
 <div class = "collaborator-container">
 
     <div class = "project-card project-detail-card">
-        <a class = "project-detail-close" href = "{% url 'idea_maker_profile' %}">&times;</a>
+        <a class = "project-detail-close" href = "{% url 'interaction_detail' project_interest.id %}">&times;</a>
 
         <h2>Contact {{ collaborator.profile.user.username }}</h2>
 

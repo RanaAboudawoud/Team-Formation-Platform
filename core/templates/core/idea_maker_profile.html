@@ -63,7 +63,7 @@
             
             <h4 class = "requirements-heading">Interested Collaborators</h4>
 
-            {% for collaborator, score, match_level, reasons, non_matching_reasons, status, message_sent, reply_sent in ranked_collaborators %}
+            {% for collaborator, score, match_level, reasons, non_matching_reasons, status in ranked_collaborators %}
 
                 <div class = "interested-collaborator">
 
@@ -104,16 +104,6 @@
                         
                         {% elif status == "accepted" %}
                             <span class = "accepted-collaborator-status">Accepted</span>
-
-                            {% if reply_sent %}
-                                <span class = "interest_status">Reply received</span>
-
-                            {% elif message_sent %}
-                                <span class = "interested_status">Message sent</span>
-
-                            {% else %}
-                                <a class = "contact-message-button" href = "{% url 'contact_message' project.id collaborator.id %}">Send contact message</a>
-                            {% endif %}
                 
                         {% endif %}
 

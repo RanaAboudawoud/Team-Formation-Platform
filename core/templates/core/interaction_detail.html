@@ -1,0 +1,114 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+<div class = "home-container">
+
+    <div class = "project-card project-detail-card">
+
+        <a class = "project-detail-close" href = "{% url 'home' %}">&times;</a>
+
+        <h2>{{ project_interest.project.name }}</h2>
+
+        <p>
+            <span class = "project-label">Collaborator: </span>
+            {{ project_interest.collaborator.profile.user.username }}
+        </p>
+
+        <p>
+            <span class = "project-label">Idea Maker: </span>
+            {{ project_interest.project.idea_maker.profile.user.username }}
+        </p>
+
+        <h3 class = "requirements-heading">Conversation</h3>
+
+        {% if project_interest.idea_maker_message_sent %}
+
+            <div class = "contact-message">
+
+                <h3>{{ project_interest.project.idea_maker.profile.user.username }}</h3>
+
+                <p>Hi {{project_interest.collaborator.profile.user.username }}!</p>
+
+                <p>
+                    I saw that you are interested in working on {{ project_interest.project.name }} and i would like to get in touch
+                </p>
+
+                <p>
+                    <span class = "project-label">Email: </span>
+                    {{ project_interest.project.idea_maker.profile.user.email }}
+                </p>
+
+                <p>
+                    <span class = "project-label">Phone Number: </span>
+                    {{ project_interest.project.idea_maker.profile.phone_number }}
+                </p>
+
+            </div>
+        {% endif %}
+
+        {% if project_interest.collaborator_reply_sent %}
+            
+            <div class = "contact-message">
+
+                <h3>{{ project_interest.collaborator.profile.user.username }}</h3>
+
+                <p>
+                    Hi {{project_interest.project.idea_maker.profile.user.username }}!
+                </p>
+
+                <p>
+                    I will contact you from this email address and phone number
+                </p>
+
+                <p>
+                    <span class = "project-label">Email: </span>
+                    {{ project_interest.collaborator.profile.user.email }}
+                </p>
+
+                <p>
+                    <span class = "project-label">Phone Number: </span>
+                    {{ project_interest.collaborator.profile.phone_number }}
+                </p>
+
+                <p>
+                    Looking forward to working with you!
+                </p>
+
+            </div>
+
+        {% endif %}
+
+        {% if is_idea_maker %}
+
+            {% if not project_interest.idea_maker_message_sent %}
+
+                <p>No messages yet</p>
+
+                <a class = "contact-message-button" href = "{% url 'contact_message' project_interest.project.id project_interest.collaborator.id %}">Send contact message</a>
+
+            {% elif project_interest.idea_maker_message_sent and not project_interest.collaborator_reply_sent %}
+
+                <span class = "interested_status">Waiting for reply</span>
+
+            {% endif %}
+        
+        {% elif is_collaborator %}
+            
+            {% if project_interest.idea_maker_message_sent and not project_interest.collaborator_reply_sent %}
+
+                <a class = "contact-message-button" href = "{% url 'contact_reply' project_interest.project.id %}">Reply</a>
+            
+            {% elif not project_interest.idea_maker_message_sent %}
+
+                <span class = "interested_status">Waiting for Idea Maker</span>
+            
+            {% endif %}
+        
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}
