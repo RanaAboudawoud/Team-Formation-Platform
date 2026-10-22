@@ -65,7 +65,13 @@ def login_view(request):
             if user is not None:
                 login(request, user)
 
-                return redirect("home")
+                profile = Profile.objects.get(user = user)
+
+                if profile.role == "idea_maker":
+                    return redirect("idea_maker_profile")
+                else:
+                    return redirect("collaborator")
+
             else:
                 form.add_error(None, "Invalid username or password")
     else:
