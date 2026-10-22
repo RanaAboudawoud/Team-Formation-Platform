@@ -16,5 +16,9 @@ urlpatterns = [
     path("show_interest/<int:project_id>/", views.show_interest, name = "show_interest"),
     path("projects/<int:project_id>/", views.project_detail, name = "project_detail"),
     path("accept_collaborator/<int:project_id>/<int:collaborator_id>", views.accept_collaborator, name = "accept_collaborator"),
-    path("decline_collaborator/<int:project_id>/<int:collaborator_id>/", views.decline_collaborator, name = "decline_collaborator")
+    path("decline_collaborator/<int:project_id>/<int:collaborator_id>/", views.decline_collaborator, name = "decline_collaborator"),
+    path("contact_message/<int:project_id>/<int:collaborator_id>/", views.contact_message, name = "contact_message"),
+    path("send_contact_message/<int:project_id>/<int:collaborator_id>/", views.send_contact_message, name = "send_contact_message"),
+    path("contact_reply/<int:project_id>/", views.contact_reply, name = "contact_reply"),
+    path("send_contact_reply/<int:project_id>/", views.send_contact_reply, name = "send_contact_reply")
 ]

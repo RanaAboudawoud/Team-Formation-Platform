@@ -39,8 +39,10 @@ def rank_interested_collaborators(project):
 
         interest = Project_interest.objects.get(project = project, collaborator = collaborator)
         status = interest.status
+        message_sent = interest.idea_maker_message_sent
+        reply_sent = interest.collaborator_reply_sent
 
-        ranked_collaborators.append((collaborator, score, match_level, reasons, non_matching_reasons, status))
+        ranked_collaborators.append((collaborator, score, match_level, reasons, non_matching_reasons, status, message_sent, reply_sent))
 
     ranked_collaborators.sort(key = itemgetter(1), reverse = True)
 

@@ -716,3 +716,29 @@ body {
     font-weight: bold;
 }
 
+/* Interaction styling */
+
+.contact-message {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f6fafd;
+    border: 1px solid #d9e0e8;
+    border-radius: 6px;
+}
+
+.contact-message h3 {
+    color: #14213D;
+    margin-top: 0;
+}
+
+.contact-message-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #14213D;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: bold;
+}
+
+
