@@ -6,7 +6,7 @@
 
     <div class = "project-card project-detail-card">
 
-        <a class = "project-detail-close" href = "{% url 'project_detail' project.id %}">&times;</a>
+        <a class = "project-detail-close" href = "{% url 'interaction_detail' project_interest.id %}">&times;</a>
 
         <h2>Reply to {{ project.idea_maker.profile.user.username }}</h2>
 

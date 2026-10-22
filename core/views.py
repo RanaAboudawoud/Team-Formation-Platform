@@ -11,7 +11,23 @@ def home(request):
     if not request.user.is_authenticated:
         return redirect("login")
 
-    return render(request, "core/home.html")
+    user = request.user
+    profile = Profile.objects.get(user = user)
+
+    collaborator_matches = Project_interest.objects.none()
+    idea_maker_matches = Project_interest.objects.none()
+
+    collaborator = Collaborator_profile.objects.filter(profile = profile).first()
+
+    if collaborator:
+        collaborator_matches = Project_interest.objects.filter(collaborator = collaborator, status = "accepted")
+
+    idea_maker = Idea_maker_profile.objects.filter(profile = profile).first()
+
+    if idea_maker:
+        idea_maker_matches = Project_interest.objects.filter(project__idea_maker = idea_maker, status = "accepted")
+
+    return render(request, "core/home.html", {"collaborator_matches": collaborator_matches, "idea_maker_matches": idea_maker_matches})
 
 def projects(request):
     projects = Project.objects.all()
@@ -49,12 +65,7 @@ def login_view(request):
             if user is not None:
                 login(request, user)
 
-                profile = Profile.objects.get(user = user)
-
-                if profile.role == "idea_maker":
-                    return redirect("idea_maker_profile")
-                else:
-                    return redirect("collaborator")
+                return redirect("home")
             else:
                 form.add_error(None, "Invalid username or password")
     else:
@@ -167,7 +178,7 @@ def idea_maker_profile(request):
     else:
         form = forms.IdeaMakerForm(initial = {"bio": idea_maker.bio})
 
-    return render(request, "core/idea_maker_profile.html", {"idea_maker_form": form, "idea_maker": idea_maker, "projects": projects, "projects_with_collaborators": projects_with_collaborators})
+    return render(request, "core/idea_maker_profile.html", {"idea_maker_form": form, "idea_maker": idea_maker, "projects_with_collaborators": projects_with_collaborators})
 
 def create_project(request):
     if not request.user.is_authenticated:
@@ -239,15 +250,11 @@ def project_detail(request, project_id):
     project_interest = Project_interest.objects.filter(collaborator = collaborator, project = project).first()
 
     interest_status = None
-    message_sent = False
-    reply_sent = False
 
     if project_interest:
         interest_status = project_interest.status
-        message_sent = project_interest.idea_maker_message_sent
-        reply_sent = project_interest.collaborator_reply_sent
 
-    return render(request, "core/project_detail.html", {"project": project, "collaborator": collaborator, "interest_status": interest_status, "message_sent": message_sent, "reply_sent": reply_sent})
+    return render(request, "core/project_detail.html", {"project": project, "interest_status": interest_status})
 
 def delete_project(request, project_id):
     if not request.user.is_authenticated:
@@ -317,9 +324,11 @@ def contact_message(request, project_id, collaborator_id):
     collaborator = Collaborator_profile.objects.get(id = collaborator_id)
 
     if not is_mutual_match(collaborator, project):
-        return redirect("idea_maker_profile")
+        return redirect("home")
 
-    return render(request, "core/contact_message.html", {"project": project, "collaborator": collaborator})
+    project_interest = Project_interest.objects.get(project = project, collaborator = collaborator)
+
+    return render(request, "core/contact_message.html", {"project": project, "collaborator": collaborator, "project_interest": project_interest})
 
 def send_contact_message(request, project_id, collaborator_id):
     if not request.user.is_authenticated:
@@ -333,14 +342,14 @@ def send_contact_message(request, project_id, collaborator_id):
     collaborator = Collaborator_profile.objects.get(id = collaborator_id)
 
     if not is_mutual_match(collaborator, project):
-        return redirect("idea_maker_profile")
+        return redirect("home")
 
     project_interest = Project_interest.objects.get(project = project, collaborator = collaborator)
 
     project_interest.idea_maker_message_sent = True
     project_interest.save()
 
-    return redirect("idea_maker_profile")
+    return redirect("interaction_detail", interest_id = project_interest.id)
 
 def contact_reply(request, project_id):
     if not request.user.is_authenticated:
@@ -351,9 +360,11 @@ def contact_reply(request, project_id):
     project = Project.objects.get(id = project_id)
 
     if not is_mutual_match(collaborator, project):
-        return redirect("collaborator")
+        return redirect("home")
 
-    return render(request, "core/contact_reply.html", {"project": project, "collaborator": collaborator})
+    project_interest = Project_interest.objects.get(project = project, collaborator = collaborator)
+
+    return render(request, "core/contact_reply.html", {"project": project, "collaborator": collaborator, "project_interest": project_interest})
 
 def send_contact_reply(request, project_id):
     if not request.user.is_authenticated:
@@ -363,10 +374,27 @@ def send_contact_reply(request, project_id):
     project = Project.objects.get(id = project_id)
 
     if not is_mutual_match(collaborator, project):
-        return redirect("collaborator")
+        return redirect("home")
 
     project_interest = Project_interest.objects.get(project = project, collaborator = collaborator)
     project_interest.collaborator_reply_sent = True
     project_interest.save()
 
-    return redirect("project_detail", project_id = project.id)
+    return redirect("interaction_detail", interest_id = project_interest.id)
+
+def interaction_detail(request, interest_id):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    user = request.user
+    profile = Profile.objects.get(user = user)
+
+    project_interest = Project_interest.objects.get(id = interest_id, status = "accepted")
+
+    is_collaborator = project_interest.collaborator.profile == profile
+    is_idea_maker = project_interest.project.idea_maker.profile == profile
+
+    if not is_collaborator and not is_idea_maker:
+        return redirect("home")
+
+    return render(request, "core/interaction_detail.html", {"project_interest": project_interest, "is_collaborator": is_collaborator, "is_idea_maker": is_idea_maker})

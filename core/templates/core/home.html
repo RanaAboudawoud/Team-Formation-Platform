@@ -3,13 +3,61 @@
 {% block content %}
 
 <div class = "home-container">
-    <h1>Welcome to Team Formation Platform</h1>
-    <p>Find projects, build teams and connect with collaborators.</p>
 
-    <div class = "home-actions">
-        <a href = "{% url 'collaborator_profile' %}">Collaborator Profile</a>
-        <a href = "{% url 'idea_maker_profile' %}">Idea Maker Profile</a>
+    <h1>Home</h1>
+    <p class = "home-description">Your mutual matches and conversations</p>
+
+    <h2>As a Collaborator</h2>
+
+    {% for match in collaborator_matches %}
+
+        <div class = "interaction-row">
+
+            <div>
+
+                <h3>{{ match.project.name }}</h3>
+
+                <p>
+                    <span class = "project-label">Idea Maker: </span>
+                    {{ match.project.idea_maker.profile.user.username}}
+                </p>
+
+            </div>
+
+            <a class = "contact-message-button" href = "{% url 'interaction_detail' match.id %}">Open Interaction</a>
+
+        </div>
+
+    {% empty %}
+
+        <p>No mutual matches as collaborator yet</p>
+    {% endfor %}
+
+    <h2>As an Idea Maker</h2>
+
+    {% for match in idea_maker_matches %}
+
+    <div class = "interaction-row">
+
+        <div>
+            <h3>{{ match.project.name }}</h3>
+
+            <p>
+                <span class = "project-label">Collaborator: </span>
+                {{ match.collaborator.profile.user.username }}
+            </p>
+
+        </div>
+
+        <a class = "contact-message-button" href = "{% url 'interaction_detail' match.id %}">Open Interaction</a>
+
     </div>
+
+    {% empty %}
+
+        <p>No mutual matches as idea maker yet</p>
+    {% endfor %}
+
 </div>
 
 {% endblock %}
