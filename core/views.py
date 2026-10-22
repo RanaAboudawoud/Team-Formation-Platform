@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from .models import Project, Profile, Collaborator_profile, Collaborator_skill, Idea_maker_profile, Project_role, Project_skill, Project_interest
 from . import forms
 from .matching import rank_projects
-from .collaborator_matching import rank_interested_collaborators
+from .collaborator_matching import rank_interested_collaborators, is_mutual_match
 
 def home(request):
     if not request.user.is_authenticated:
@@ -309,8 +309,15 @@ def contact_message(request, project_id, collaborator_id):
     if not request.user.is_authenticated:
         return redirect("login")
 
-    project = Project.objects.get(id = project_id)
+    user = request.user
+    profile = Profile.objects.get(user = user)
+    idea_maker = Idea_maker_profile.objects.get(profile = profile)
+
+    project = Project.objects.get(id = project_id, idea_maker = idea_maker)
     collaborator = Collaborator_profile.objects.get(id = collaborator_id)
+
+    if not is_mutual_match(collaborator, project):
+        return redirect("idea_maker_profile")
 
     return render(request, "core/contact_message.html", {"project": project, "collaborator": collaborator})
 
@@ -318,8 +325,15 @@ def send_contact_message(request, project_id, collaborator_id):
     if not request.user.is_authenticated:
         return redirect("login")
 
-    project = Project.objects.get(id = project_id)
+    user = request.user
+    profile = Profile.objects.get(user = user)
+    idea_maker = Idea_maker_profile.objects.get(profile = profile)
+
+    project = Project.objects.get(id = project_id, idea_maker = idea_maker)
     collaborator = Collaborator_profile.objects.get(id = collaborator_id)
+
+    if not is_mutual_match(collaborator, project):
+        return redirect("idea_maker_profile")
 
     project_interest = Project_interest.objects.get(project = project, collaborator = collaborator)
 
