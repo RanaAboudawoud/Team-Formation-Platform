@@ -1,0 +1,46 @@
+{% extends "core/base.html" %}
+
+{% block content %}
+
+<div class = "collaborator-container">
+
+    <div class = "project-card project-detail-card">
+        <a class = "project-detail-close" href = "{% url 'idea_maker_profile' %}">&times;</a>
+
+        <h2>Contact {{ collaborator.profile.user.username }}</h2>
+
+        <div class = "contact-message">
+
+            <h3>Message preview</h3>
+
+            <p>
+                Hi {{collaborator.profile.user.username }}!
+            </p>
+
+            <p>
+                I saw that you are interested in working on {{ project.name }} and i would like to get in touch
+            </p>
+
+            <p>
+                <span class = "project-label">Email: </span>
+                {{ project.idea_maker.profile.user.email }}
+            </p>
+
+            <p>
+                <span class = "project-label">Phone Number: </span>
+                {{ project.idea_maker.profile.phone_number }}
+            </p>
+
+        </div>
+
+        <div class = "project-actions">
+
+            <a class = "contact-message-button" href = "{% url 'send_contact_message' project.id collaborator.id %}">Send</a>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

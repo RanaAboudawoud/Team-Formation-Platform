@@ -239,11 +239,15 @@ def project_detail(request, project_id):
     project_interest = Project_interest.objects.filter(collaborator = collaborator, project = project).first()
 
     interest_status = None
+    message_sent = False
+    reply_sent = False
 
     if project_interest:
         interest_status = project_interest.status
+        message_sent = project_interest.idea_maker_message_sent
+        reply_sent = project_interest.collaborator_reply_sent
 
-    return render(request, "core/project_detail.html", {"project": project, "interest_status": interest_status})
+    return render(request, "core/project_detail.html", {"project": project, "collaborator": collaborator, "interest_status": interest_status, "message_sent": message_sent, "reply_sent": reply_sent})
 
 def delete_project(request, project_id):
     if not request.user.is_authenticated:
@@ -300,3 +304,48 @@ def decline_collaborator(request, project_id, collaborator_id):
     project_interest.save()
 
     return redirect("idea_maker_profile")
+
+def contact_message(request, project_id, collaborator_id):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    project = Project.objects.get(id = project_id)
+    collaborator = Collaborator_profile.objects.get(id = collaborator_id)
+
+    return render(request, "core/contact_message.html", {"project": project, "collaborator": collaborator})
+
+def send_contact_message(request, project_id, collaborator_id):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    project = Project.objects.get(id = project_id)
+    collaborator = Collaborator_profile.objects.get(id = collaborator_id)
+
+    project_interest = Project_interest.objects.get(project = project, collaborator = collaborator)
+
+    project_interest.idea_maker_message_sent = True
+    project_interest.save()
+
+    return redirect("idea_maker_profile")
+
+def contact_reply(request, project_id):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    collaborator = Collaborator_profile.objects.get(profile__user = request.user)
+    project = Project.objects.get(id = project_id)
+
+    return render(request, "core/contact_reply.html", {"project": project, "collaborator": collaborator})
+
+def send_contact_reply(request, project_id):
+    if not request.user.is_authenticated:
+        return redirect("login")
+
+    collaborator = Collaborator_profile.objects.get(profile__user = request.user)
+    project = Project.objects.get(id = project_id)
+
+    project_interest = Project_interest.objects.get(project = project, collaborator = collaborator)
+    project_interest.collaborator_reply_sent = True
+    project_interest.save()
+
+    return redirect("project_detail", project_id = project.id)
