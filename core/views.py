@@ -346,8 +346,12 @@ def contact_reply(request, project_id):
     if not request.user.is_authenticated:
         return redirect("login")
 
+
     collaborator = Collaborator_profile.objects.get(profile__user = request.user)
     project = Project.objects.get(id = project_id)
+
+    if not is_mutual_match(collaborator, project):
+        return redirect("collaborator")
 
     return render(request, "core/contact_reply.html", {"project": project, "collaborator": collaborator})
 
@@ -357,6 +361,9 @@ def send_contact_reply(request, project_id):
 
     collaborator = Collaborator_profile.objects.get(profile__user = request.user)
     project = Project.objects.get(id = project_id)
+
+    if not is_mutual_match(collaborator, project):
+        return redirect("collaborator")
 
     project_interest = Project_interest.objects.get(project = project, collaborator = collaborator)
     project_interest.collaborator_reply_sent = True
