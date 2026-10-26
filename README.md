@@ -66,46 +66,26 @@
 
 ---
 
-## Your Backlog
+## User manual
 
-Your backlog lives in two places, working together:
+### Installing
+1. Clone the repo
+2. Go into project folder
+3. Create virtual environment:
+    - python -m venv venv
+4. Activate the virtual environment
+    - For windows users:
+        - venv\Scripts\avticate
+    - For macos/linux users:
+        - source venv/bin/activate
+5. Install django
+    - pip install Django==6.1.1
+6. Run the database migrations
+    - python manage.py migrate
 
-### 1. GitHub Issues (the content)
-
-For every user story, feature, and task, create a GitHub Issue with a clear title and description. Use the issue template provided in this repository (see `.github/ISSUE_TEMPLATE/`).
-
-Write them in this order:
-1. All **user stories** first (format: *"As [a user], I want [action] so that [goal]"*)
-2. Then all **features**
-3. Then all **tasks**
-
-### 2. Project Board (the backlog itself)
-
-Add every Issue to a Project board. The board is your backlog, not the issue text.
-
-Your repository does not come with a board already set up — see **[PROJECT_BOARD.md](PROJECT_BOARD.md)** for step-by-step instructions on creating your board and setting up the required fields (Priority, Estimated Effort, Sprint). 
-
-You'll need a working board by the end of Sprint 1, as Status Report 3 requires it.
-
-
----
-
-## Development
-
-From Week 38 onward:
-- Set up your development environment and start development.
-- You're free to organise your code however works best for you — for example, using `src/` and `docs/` folders, or any other structure. There's no required folder layout; 
-- At the end of each sprint, your work will be demonstrated to the customer at that sprint's Demo
-- Keep this README as the one place that always explains how to install and run your project.
-
-
-Your repository must remain **Private** for the entire course. This protects your customer's requirements and your own work.
-
----
-
-## Documenting Your Project
-
-Once Sprint 2 begins, add a **User Manual** section to this README, covering:
-- **Installing** — what's needed to set up your project locally (dependencies, environment, etc.)
-- **Running** — how to start/execute the application
+### Running
+1. Start the server
+    - python manage.py runserver
+2. Open in browser with this url
+    - http://127.0.0.1:8000/
 
